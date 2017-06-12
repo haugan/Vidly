@@ -1,6 +1,6 @@
-﻿namespace Vidly.Models
+﻿namespace Vidly.ViewModels
 {
-    public class Movie
+    public class MovieDetailsViewModel
     {
         public int Id { get; set; }
         public string Title { get; set; }

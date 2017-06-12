@@ -15,7 +15,7 @@
         <table class="table table-striped table-responsive table-hover">
             <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>Title</th>
                     <th>Genre</th>
                 </tr>
             </thead>
@@ -23,7 +23,7 @@
                 @foreach (var movie in Model.Movies)
                 {
                     <tr>
-                        <td>@movie.Name</td>
+                        <td>@Html.ActionLink(movie.Title, "Details", "Movies", new { id = movie.Id }, null)</td>
                         <td>@movie.Genre</td>
                     </tr>
                 }
