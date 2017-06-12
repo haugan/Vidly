@@ -7,27 +7,25 @@ namespace Vidly.Controllers
 {
     public class MoviesController : Controller
     {
-        // GET: movies/random
-        public ActionResult Random()
+        // GET: Movies
+        public ActionResult Index()
         {
-            var movie = new Movie()
+            var movies = new List<Movie>
             {
-                Name = "Memento"
+                new Movie {Name = "The Raid", Genre = "Action" },
+                new Movie {Name = "Memento", Genre = "Thriller" },
+                new Movie {Name = "Cloud Atlas", Genre = "Sci-Fi" },
+                new Movie {Name = "The Babadook", Genre = "Horror" },
+                new Movie {Name = "Step Brothers", Genre = "Comedy" },
+                new Movie {Name = "Manchester by the Sea", Genre = "Drama" }
             };
 
-            var customers = new List<Customer>
+            var model = new MovieIndexViewModel
             {
-                new Customer {Name = "Customer 1" },
-                new Customer {Name = "Customer 2" },
+                Movies = movies
             };
 
-            var viewModel = new MovieCustomersViewModel
-            {
-                Movie = movie,
-                Customers = customers
-            };
-
-            return View(viewModel);
+            return View(model);
         }
     }
 }

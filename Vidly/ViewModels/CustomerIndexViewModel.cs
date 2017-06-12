@@ -3,9 +3,8 @@ using Vidly.Models;
 
 namespace Vidly.ViewModels
 {
-    public class MovieCustomersViewModel
+    public class CustomerIndexViewModel
     {
-        public Movie Movie { get; set; }
         public List<Customer> Customers { get; set; }
     }
 }
