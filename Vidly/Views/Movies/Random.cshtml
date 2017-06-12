@@ -4,13 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*Render dynamic HTML attributes.*@
+@*RENDER DYNAMIC HTML ATTRIBUTES*@
 @{ 
     var className = Model.Customers.Count > 3 ? "popular" : null;
 }
 <h2 class="@className">@Model.Movie.Name</h2>
 
-@*Conditional HTML rendering.*@
+@*CONDITIONAL HTML RENDERING*@
 @if (Model.Customers.Count == 0)
 {
     <text>There's no customers listed.</text>
