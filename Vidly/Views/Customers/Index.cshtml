@@ -17,14 +17,16 @@
                 <tr>
                     <th>Last name</th>
                     <th>First name</th>
+                    <th>Discount rate</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var customer in Model.Customers)
                 {
                     <tr>
-                        <td>@customer.Firstname</td>
                         <td>@Html.ActionLink(customer.Lastname, "Details", "Customers", new { id = customer.Id }, null)</td>
+                        <td>@customer.Firstname</td>
+                        <td>@customer.MembershipType.DiscountRate%</td>
                     </tr>
                 }
             </tbody>
