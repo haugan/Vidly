@@ -5,3 +5,10 @@
 }
 
 <h2>@Model.Lastname, @Model.Firstname </h2>
+<ul>
+    <li>Membership type: @Model.MembershipType.Name</li>
+    @if (Model.BirthDate.HasValue)
+    {
+        <li>Birthdate: @Model.BirthDate.Value.ToShortDateString()</li>
+    }
+</ul>

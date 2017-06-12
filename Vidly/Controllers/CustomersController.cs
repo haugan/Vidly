@@ -43,6 +43,7 @@ namespace Vidly.Controllers
         public ActionResult Details(int id)
         {
             var customer = _context.Customers
+                                   .Include(c => c.MembershipType)
                                    .SingleOrDefault(c => c.Id == id);
 
             if (customer == null)
@@ -50,9 +51,10 @@ namespace Vidly.Controllers
 
             var model = new CustomerDetailsViewModel
             {
-                Id = customer.Id,
                 Firstname = customer.Firstname,
-                Lastname = customer.Lastname
+                Lastname = customer.Lastname,
+                BirthDate = customer.BirthDate,
+                MembershipType = customer.MembershipType
             };
 
             return View(model);
