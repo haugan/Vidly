@@ -1,24 +1,37 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+
+    <!--HTML META DATA-->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Vidly</title>
+
+    <!--CSS SCRIPTS-->
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
+
+    <!--NAVIGATION BAR-->
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
+
+            <!--NAVIGATION HEADER-->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+                <!--APPLICATION BRAND HOME LINK-->
+                @Html.ActionLink("Vidly", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
             </div>
+
+            <!--NAVIGATION MENU-->
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
@@ -27,18 +40,29 @@
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
+
         </div>
     </div>
+
+    <!--BODY CONTENT CONTAINER-->
     <div class="container body-content">
+
+        <!--MAIN CONTENT-->
         @RenderBody()
+
+
+        <!--FOOTER-->
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Vidly</p>
         </footer>
+
     </div>
 
+    <!--JAVASCRIPTS-->
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
 </body>
 </html>
