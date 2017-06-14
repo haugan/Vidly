@@ -25,13 +25,10 @@ namespace Vidly.Controllers
         {
             // EAGER LOADING OF CUSTOMERS & LINKED MEMBERSHIP TYPE
             var customers = _context.Customers
-                                    .Include(c => c.MembershipType)
-                                    .ToList();
+                .Include(c => c.MembershipType)
+                .ToList();
 
-            if (customers == null)
-                return HttpNotFound();
-
-            var model = new CustomerIndexViewModel
+            var model = new CustomersIndexViewModel
             {
                 Customers = customers
             };
@@ -43,8 +40,8 @@ namespace Vidly.Controllers
         public ActionResult Details(int id)
         {
             var customer = _context.Customers
-                                   .Include(c => c.MembershipType)
-                                   .SingleOrDefault(c => c.Id == id);
+                .Include(c => c.MembershipType)
+                .SingleOrDefault(c => c.Id == id);
 
             if (customer == null)
                 return HttpNotFound();

@@ -1,4 +1,4 @@
-﻿@model Vidly.ViewModels.MovieIndexViewModel
+﻿@model Vidly.ViewModels.MoviesIndexViewModel
 @{
     ViewBag.Title = "Movie index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -24,7 +24,7 @@
                 {
                     <tr>
                         <td>@Html.ActionLink(movie.Title, "Details", "Movies", new { id = movie.Id }, null)</td>
-                        <td>@movie.Genre</td>
+                        <td>@movie.Genre.Name</td>
                     </tr>
                 }
             </tbody>
