@@ -1,0 +1,42 @@
+﻿@model Vidly.ViewModels.CustomerNewViewModel
+@{
+    ViewBag.Title = "New customer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create new customer</h2>
+<hr />
+<!--DISPOSE FORM OBJECT WHEN EXITING BLOCK-->
+@using (Html.BeginForm("Create", "Customers"))
+{
+    <!--FIRST NAME-->
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.Firstname)
+        @Html.TextBoxFor(m => m.Customer.Firstname, new { @class = "form-control" })
+    </div>
+    <!--LAST NAME-->
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.Lastname)
+        @Html.TextBoxFor(m => m.Customer.Lastname, new { @class = "form-control" })
+    </div>
+    <!--BIRTH DATE-->
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.BirthDate)
+        @Html.TextBoxFor(m => m.Customer.BirthDate, new { @class = "form-control" })
+    </div>
+    <br />
+    <!--MEMBERSHIP TYPE-->
+    <div class="form-group">
+        <label>Membership type</label>
+        @Html.DropDownListFor(m => m.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "---", new { @class = "form-control" })
+    </div>
+    <!--IS SUBSCRIBED-->
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m => m.Customer.IsSubscribedToNewsletter) Subscribed to newsletter
+        </label>
+    </div>
+    <!--SUBMIT-->
+    <br/>
+    <button type="submit" class="btn btn-primary">Create</button> 
+}

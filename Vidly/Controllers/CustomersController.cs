@@ -56,5 +56,28 @@ namespace Vidly.Controllers
 
             return View(model);
         }
+
+        // GET: Customers/New
+        public ActionResult New()
+        {
+            var membershipTypes = _context.MembershipTypes.ToList();
+            var model = new CustomerNewViewModel
+            {
+                MembershipTypes = membershipTypes,
+            };
+
+            return View(model);
+        }
+
+        // POST: Customers/Create
+        [HttpPost]
+        public ActionResult Create(Customer customer) // ASP.NET MVC automatically maps form post to this model (model binding)
+        {
+            _context.Customers.Add(customer);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Customers");
+        }
+
     }
 }
