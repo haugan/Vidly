@@ -6,6 +6,7 @@
 
 <h2>Customer form</h2>
 <hr />
+
 <!--DISPOSE FORM OBJECT WHEN EXITING BLOCK-->
 @using (Html.BeginForm("Save", "Customers"))
 {
@@ -14,30 +15,37 @@
         @Html.LabelFor(m => m.Customer.Firstname)
         @Html.TextBoxFor(m => m.Customer.Firstname, new { @class = "form-control" })
     </div>
+
     <!--LAST NAME-->
     <div class="form-group">
         @Html.LabelFor(m => m.Customer.Lastname)
         @Html.TextBoxFor(m => m.Customer.Lastname, new { @class = "form-control" })
     </div>
+
     <!--BIRTH DATE-->
     <div class="form-group">
         @Html.LabelFor(m => m.Customer.BirthDate)
         @Html.TextBoxFor(m => m.Customer.BirthDate, "{0:d MMM yyyy}" ,new { @class = "form-control" })
     </div>
+
     <br />
+
     <!--MEMBERSHIP TYPE-->
     <div class="form-group">
         <label>Membership type</label>
         @Html.DropDownListFor(m => m.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "---", new { @class = "form-control" })
     </div>
+
     <!--IS SUBSCRIBED-->
     <div class="checkbox">
         <label>
             @Html.CheckBoxFor(m => m.Customer.IsSubscribedToNewsletter) Subscribed to newsletter
         </label>
     </div>
+
     <!--HIDDEN FIELD-->
     @Html.HiddenFor(m => m.Customer.Id)
+
     <!--SUBMIT-->
     <br/>
     <button type="submit" class="btn btn-primary">Save</button> 

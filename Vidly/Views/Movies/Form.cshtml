@@ -1,0 +1,49 @@
+﻿@model Vidly.ViewModels.MovieFormViewModel
+@{
+    ViewBag.Title = "Movie form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Movie form</h2>
+<hr />
+
+<!--DISPOSE FORM OBJECT WHEN EXITING BLOCK-->
+@using (Html.BeginForm("Save", "Movies"))
+{
+    <!--TITLE-->
+    <div class="form-group">
+        @Html.LabelFor(m => m.Movie.Title)
+        @Html.TextBoxFor(m => m.Movie.Title, new { @class = "form-control"})
+    </div>
+
+    <!--RELEASE DATE-->
+    <div class="form-group">
+        @Html.LabelFor(m => m.Movie.ReleaseDate)
+        @Html.TextBoxFor(m => m.Movie.ReleaseDate, "{0:d MMM yyyy}", new { @class = "form-control" })
+    </div>
+
+    <!--ADDED DATE-->
+    <div class="form-group">
+        @Html.LabelFor(m => m.Movie.AddedDate)
+        @Html.TextBoxFor(m => m.Movie.AddedDate, "{0:d MMM yyyy}", new { @class = "form-control" })
+    </div>
+
+    <!--STOCK-->
+    <div class="form-group">
+        @Html.LabelFor(m => m.Movie.Stock)
+        @Html.TextBoxFor(m => m.Movie.Stock, new { @class = "form-control" })
+    </div>
+
+    <!--GENRE-->
+    <div class="form-group">
+        <label>Genre</label>
+        @Html.DropDownListFor(m => m.Movie.GenreId, new SelectList(Model.Genres, "Id", "Name"), "---", new { @class = "form-control"})
+    </div>
+
+    <!--HIDDEN FIELD-->
+    @Html.HiddenFor(m => m.Movie.Id)
+
+    <!--SUBMIT-->
+    <br/>
+    <button type="submit" class="btn btn-primary">Save</button> 
+}

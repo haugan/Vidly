@@ -5,7 +5,9 @@
 }
 
 <div class="container">
-    <h2>Movie index</h2>
+    <h2>Movies</h2>
+    @Html.ActionLink("Create new movie", "New", "Movies")
+    <hr />
     @if (Model.Movies.Count < 1)
     {
         <text>There's no registered movies.</text>
@@ -23,7 +25,7 @@
                 @foreach (var movie in Model.Movies)
                 {
                     <tr>
-                        <td>@Html.ActionLink(movie.Title, "Details", "Movies", new { id = movie.Id }, null)</td>
+                        <td>@Html.ActionLink(movie.Title, "Edit", "Movies", new { id = movie.Id }, null)</td>
                         <td>@movie.Genre.Name</td>
                     </tr>
                 }

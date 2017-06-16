@@ -6,7 +6,8 @@
 
 <div class="container">
     <h2>Customers</h2>
-    <p>@Html.ActionLink("Create new customer", "New", "Customers")</p>
+    @Html.ActionLink("Create new customer", "New", "Customers")
+    <hr />
     @if (Model.Customers.Count < 1)
     {
         <text>There's no registered customers.</text>

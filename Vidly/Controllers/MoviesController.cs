@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web.Mvc;
 using Vidly.Models;
@@ -23,40 +24,90 @@ namespace Vidly.Controllers
         // GET: Movies
         public ActionResult Index()
         {
-            var movies = _context.Movies
+            var dbMovies = _context.Movies
                 .Include(m => m.Genre)
                 .ToList();
 
             var model = new MoviesIndexViewModel
             {
-                Movies = movies
+                Movies = dbMovies
             };
 
             return View(model);
         }
 
-        // GET: Movies/Details/123
+        // GET: Movies/Details/777
         public ActionResult Details(int id)
         {
-            var movie = _context.Movies
+            var dbMovie = _context.Movies
                 .Include(m => m.Genre)
                 .SingleOrDefault(m => m.Id == id);
 
-            if (movie == null)
+            if (dbMovie == null)
                 return HttpNotFound();
 
             var model = new MovieDetailsViewModel
             {
-                Title = movie.Title,
-                ReleaseDate = movie.ReleaseDate,
-                AddedDate = movie.AddedDate,
-                Stock = movie.Stock,
-                Genre = movie.Genre
+                Title = dbMovie.Title,
+                ReleaseDate = dbMovie.ReleaseDate,
+                AddedDate = dbMovie.AddedDate,
+                Stock = dbMovie.Stock,
+                Genre = dbMovie.Genre
             };
 
 
             return View(model);
         }
 
+        // GET: Movies/Edit/777
+        public ActionResult Edit(int id)
+        {
+            var dbMovie = _context.Movies.SingleOrDefault(m => m.Id == id);
+
+            if (dbMovie == null)
+                return HttpNotFound($"Could not find movie with id {id} in database.");
+
+            var model = new MovieFormViewModel()
+            {
+                Movie = dbMovie,
+                Genres = _context.Genres.ToList()
+            };
+
+            return View("Form", model);
+        }
+
+        // GET: Movies/New
+        public ActionResult New()
+        {
+            var dbGenres = _context.Genres.ToList();
+            var model = new MovieFormViewModel
+            {
+                Genres = dbGenres,
+            };
+
+            return View("Form", model);
+        }
+
+        // POST: Movies/Save
+        [HttpPost]
+        public ActionResult Save(Movie movie) // Model binding 
+        {
+            if (movie.Id == 0)
+                _context.Movies.Add(movie);
+            else
+            {
+                var dbMovie = _context.Movies.Single(c => c.Id == movie.Id);
+
+                dbMovie.Title = movie.Title;
+                dbMovie.ReleaseDate = movie.ReleaseDate;
+                dbMovie.AddedDate = movie.AddedDate;
+                dbMovie.Stock = movie.Stock;
+                dbMovie.GenreId = movie.GenreId;
+            }
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Movies");
+        }
     }
 }

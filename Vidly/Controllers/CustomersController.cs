@@ -24,63 +24,63 @@ namespace Vidly.Controllers
         public ActionResult Index()
         {
             // EAGER LOADING OF CUSTOMERS & LINKED MEMBERSHIP TYPE
-            var customers = _context.Customers
+            var dbCustomers = _context.Customers
                 .Include(c => c.MembershipType)
                 .ToList();
 
             var model = new CustomersIndexViewModel
             {
-                Customers = customers
+                Customers = dbCustomers
             };
 
             return View(model);
         }
 
-        // GET: Customers/Details/123
+        // GET: Customers/Details/777
         public ActionResult Details(int id)
         {
-            var customer = _context.Customers
+            var dbCustomer = _context.Customers
                 .Include(c => c.MembershipType)
                 .SingleOrDefault(c => c.Id == id);
 
-            if (customer == null)
+            if (dbCustomer == null)
                 return HttpNotFound();
 
             var model = new CustomerDetailsViewModel
             {
-                Firstname = customer.Firstname,
-                Lastname = customer.Lastname,
-                BirthDate = customer.BirthDate,
-                MembershipType = customer.MembershipType
+                Firstname = dbCustomer.Firstname,
+                Lastname = dbCustomer.Lastname,
+                BirthDate = dbCustomer.BirthDate,
+                MembershipType = dbCustomer.MembershipType
             };
 
             return View(model);
         }
 
-        // GET: Customers/New
-        public ActionResult New()
+        // GET: Customers/Edit/777
+        public ActionResult Edit(int id)
         {
-            var membershipTypes = _context.MembershipTypes.ToList();
-            var model = new CustomerFormViewModel
+            var dbCustomer = _context.Customers.SingleOrDefault(c => c.Id == id);
+
+            if (dbCustomer == null)
+                return HttpNotFound($"Could not find customer with id {id} in database.");
+
+            var model = new CustomerFormViewModel()
             {
-                MembershipTypes = membershipTypes,
+                Customer = dbCustomer,
+                MembershipTypes = _context.MembershipTypes.ToList()
             };
 
             return View("Form", model);
         }
 
-        // GET: Customers/Edit
-        public ActionResult Edit(int id)
+        // GET: Customers/New
+        public ActionResult New()
         {
-            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
-
-            if (customer == null)
-                return HttpNotFound();
-
-            var model = new CustomerFormViewModel()
+            var dbMembershipTypes = _context.MembershipTypes.ToList();
+            var model = new CustomerFormViewModel
             {
-                Customer = customer,
-                MembershipTypes = _context.MembershipTypes.ToList()
+                MembershipTypes = dbMembershipTypes,
             };
 
             return View("Form", model);
@@ -88,7 +88,7 @@ namespace Vidly.Controllers
 
         // POST: Customers/Save
         [HttpPost]
-        public ActionResult Save(Customer customer) // ASP.NET MVC automatically maps form post to this model (model binding)
+        public ActionResult Save(Customer customer) // Model binding 
         {
             if (customer.Id == 0)
                 _context.Customers.Add(customer);

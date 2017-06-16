@@ -192,6 +192,11 @@
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Migrations\201706161254299_AddRequired.cs" />
+    <Compile Include="Migrations\201706161254299_AddRequired.Designer.cs">
+      <DependentUpon>201706161254299_AddRequired.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\MovieFormViewModel.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -320,6 +325,7 @@
     <Content Include="Views\Customers\Details.cshtml" />
     <Content Include="Views\Movies\Details.cshtml" />
     <Content Include="Views\Customers\Form.cshtml" />
+    <Content Include="Views\Movies\Form.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -375,6 +381,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706140911144_AddMovieAndGenreTables.resx">
       <DependentUpon>201706140911144_AddMovieAndGenreTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706161254299_AddRequired.resx">
+      <DependentUpon>201706161254299_AddRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
