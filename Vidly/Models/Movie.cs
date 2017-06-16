@@ -7,24 +7,23 @@ namespace Vidly.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Title is required.")]
         [StringLength(255)]
         public string Title { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Release date is required.")]
         [Display(Name = "Release date")]
         public DateTime ReleaseDate { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Added date is required.")]
         [Display(Name = "Added date")]
         public DateTime AddedDate { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Stock number is required.")]
         [Display(Name = "Stock")]
         public int Stock { get; set; }
 
-
-        [Required]
+        [Required(ErrorMessage = "Genre is required.")]
         public byte GenreId { get; set; }
         public Genre Genre { get; set; }
     }

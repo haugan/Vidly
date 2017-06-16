@@ -196,6 +196,11 @@
     <Compile Include="Migrations\201706161254299_AddRequired.Designer.cs">
       <DependentUpon>201706161254299_AddRequired.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706161343551_RemoveRequiredBirthDate.cs" />
+    <Compile Include="Migrations\201706161343551_RemoveRequiredBirthDate.Designer.cs">
+      <DependentUpon>201706161343551_RemoveRequiredBirthDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AgeValidation.cs" />
     <Compile Include="ViewModels\MovieFormViewModel.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -384,6 +389,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706161254299_AddRequired.resx">
       <DependentUpon>201706161254299_AddRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706161343551_RemoveRequiredBirthDate.resx">
+      <DependentUpon>201706161343551_RemoveRequiredBirthDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
