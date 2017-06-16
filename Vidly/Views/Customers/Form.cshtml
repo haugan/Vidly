@@ -10,6 +10,9 @@
 <!--DISPOSE FORM OBJECT WHEN EXITING BLOCK-->
 @using (Html.BeginForm("Save", "Customers"))
 {
+    <!--ERROR MESSAGE SUMMARY-->
+    @Html.ValidationSummary(true, "Oops! Something went wrong.")
+
     <!--FIRST NAME-->
     <div class="form-group">
         @Html.LabelFor(m => m.Customer.Firstname)
@@ -24,18 +27,18 @@
         @Html.ValidationMessageFor(m => m.Customer.Lastname)
     </div>
 
-    <!--BIRTH DATE-->
-    <div class="form-group">
-        @Html.LabelFor(m => m.Customer.BirthDate)
-        @Html.TextBoxFor(m => m.Customer.BirthDate, "{0:d MMM yyyy}" ,new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Customer.BirthDate)
-    </div>
-
     <!--MEMBERSHIP TYPE-->
     <div class="form-group">
         <label>Membership type</label>
         @Html.DropDownListFor(m => m.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "---", new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Customer.MembershipTypeId)
+    </div>
+
+    <!--BIRTH DATE-->
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.BirthDate)
+        @Html.TextBoxFor(m => m.Customer.BirthDate, "{0:d MMM yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Customer.BirthDate)
     </div>
 
     <!--IS SUBSCRIBED-->

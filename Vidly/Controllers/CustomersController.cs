@@ -80,6 +80,7 @@ namespace Vidly.Controllers
             var dbMembershipTypes = _context.MembershipTypes.ToList();
             var model = new CustomerFormViewModel
             {
+                Customer = new Customer(), // Removes implicit CustomerId validation in form (initializes default model values)
                 MembershipTypes = dbMembershipTypes,
             };
 
@@ -115,6 +116,5 @@ namespace Vidly.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index", "Customers");
         }
-
     }
 }
