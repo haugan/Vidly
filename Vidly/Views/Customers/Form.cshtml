@@ -1,13 +1,13 @@
-﻿@model Vidly.ViewModels.CustomerNewViewModel
+﻿@model Vidly.ViewModels.CustomerFormViewModel
 @{
-    ViewBag.Title = "New customer";
+    ViewBag.Title = "Customer form";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create new customer</h2>
+<h2>Customer form</h2>
 <hr />
 <!--DISPOSE FORM OBJECT WHEN EXITING BLOCK-->
-@using (Html.BeginForm("Create", "Customers"))
+@using (Html.BeginForm("Save", "Customers"))
 {
     <!--FIRST NAME-->
     <div class="form-group">
@@ -22,7 +22,7 @@
     <!--BIRTH DATE-->
     <div class="form-group">
         @Html.LabelFor(m => m.Customer.BirthDate)
-        @Html.TextBoxFor(m => m.Customer.BirthDate, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.Customer.BirthDate, "{0:d MMM yyyy}" ,new { @class = "form-control" })
     </div>
     <br />
     <!--MEMBERSHIP TYPE-->
@@ -36,7 +36,9 @@
             @Html.CheckBoxFor(m => m.Customer.IsSubscribedToNewsletter) Subscribed to newsletter
         </label>
     </div>
+    <!--HIDDEN FIELD-->
+    @Html.HiddenFor(m => m.Customer.Id)
     <!--SUBMIT-->
     <br/>
-    <button type="submit" class="btn btn-primary">Create</button> 
+    <button type="submit" class="btn btn-primary">Save</button> 
 }

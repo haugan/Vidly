@@ -8,7 +8,7 @@ namespace Vidly.Controllers
 {
     public class CustomersController : Controller
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         public CustomersController()
         {
@@ -61,19 +61,48 @@ namespace Vidly.Controllers
         public ActionResult New()
         {
             var membershipTypes = _context.MembershipTypes.ToList();
-            var model = new CustomerNewViewModel
+            var model = new CustomerFormViewModel
             {
                 MembershipTypes = membershipTypes,
             };
 
-            return View(model);
+            return View("Form", model);
         }
 
-        // POST: Customers/Create
-        [HttpPost]
-        public ActionResult Create(Customer customer) // ASP.NET MVC automatically maps form post to this model (model binding)
+        // GET: Customers/Edit
+        public ActionResult Edit(int id)
         {
-            _context.Customers.Add(customer);
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+
+            if (customer == null)
+                return HttpNotFound();
+
+            var model = new CustomerFormViewModel()
+            {
+                Customer = customer,
+                MembershipTypes = _context.MembershipTypes.ToList()
+            };
+
+            return View("Form", model);
+        }
+
+        // POST: Customers/Save
+        [HttpPost]
+        public ActionResult Save(Customer customer) // ASP.NET MVC automatically maps form post to this model (model binding)
+        {
+            if (customer.Id == 0)
+                _context.Customers.Add(customer);
+            else
+            {
+                var dbCustomer = _context.Customers.Single(c => c.Id == customer.Id);
+
+                dbCustomer.Firstname = customer.Firstname;
+                dbCustomer.Lastname = customer.Lastname;
+                dbCustomer.BirthDate = customer.BirthDate;
+                dbCustomer.MembershipTypeId = customer.MembershipTypeId;
+                dbCustomer.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
+            }
+            
             _context.SaveChanges();
 
             return RedirectToAction("Index", "Customers");
