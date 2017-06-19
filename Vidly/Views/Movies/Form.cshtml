@@ -44,7 +44,15 @@
     <!--HIDDEN FIELD-->
     @Html.HiddenFor(m => m.Movie.Id)
 
+    <!--ANTI CSRF-->
+    @Html.AntiForgeryToken()
+
     <!--SUBMIT-->
     <br/>
     <button type="submit" class="btn btn-primary">Save</button> 
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
 }

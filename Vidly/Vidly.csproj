@@ -201,7 +201,6 @@
       <DependentUpon>201706161343551_RemoveRequiredBirthDate.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\MinimumAgeValidation.cs" />
-    <Compile Include="Models\StockRangeValidation.cs" />
     <Compile Include="ViewModels\MovieFormViewModel.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="Global.asax.cs">

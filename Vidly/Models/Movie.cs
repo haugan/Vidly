@@ -17,7 +17,9 @@ namespace Vidly.Models
 
         public DateTime AddedDate { get; set; }
 
-        [StockRangeValidation]
+        [Display(Name = "Stock amount")]
+        [Range(1, 20, ErrorMessage = "Stock amount must be between 1 and 20.")]
+        [Required(ErrorMessage = "Stock amount is required.")]
         public int Stock { get; set; }
 
         [Required(ErrorMessage = "Genre is required.")]
