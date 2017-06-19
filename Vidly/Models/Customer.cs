@@ -7,18 +7,18 @@ namespace Vidly.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "First name is required.")]
-        [StringLength(255)]
         [Display(Name = "First name")]
+        [StringLength(255)]
+        [Required(ErrorMessage = "First name is required.")]
         public string Firstname { get; set; }
 
-        [Required(ErrorMessage = "Last name is required.")]
-        [StringLength(255)]
         [Display(Name = "Last name")]
+        [StringLength(255)]
+        [Required(ErrorMessage = "Last name is required.")]
         public string Lastname { get; set; }
 
         [Display(Name = "Date of Birth")]
-        [AgeValidation]
+        [MinimumAgeValidation]
         public DateTime? BirthDate { get; set; }
 
         public bool IsSubscribedToNewsletter { get; set; }

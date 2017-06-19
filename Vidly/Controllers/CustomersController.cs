@@ -92,6 +92,7 @@ namespace Vidly.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Save(Customer customer) // Model binding 
         {
+            // VALIDATION OK
             if (!ModelState.IsValid)
             {
                 var model = new CustomerFormViewModel()
@@ -102,6 +103,7 @@ namespace Vidly.Controllers
                 return View("Form", model);
             }
 
+            // ID DEFAULTS TO 0 AND INHERENTLY REQUIRED (FIX)
             if (customer.Id == 0)
                 _context.Customers.Add(customer);
             else
@@ -114,6 +116,7 @@ namespace Vidly.Controllers
                 dbCustomer.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
             }
             
+            // SAVE TO DB AND RETURN
             _context.SaveChanges();
             return RedirectToAction("Index", "Customers");
         }

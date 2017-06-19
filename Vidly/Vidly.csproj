@@ -200,7 +200,8 @@
     <Compile Include="Migrations\201706161343551_RemoveRequiredBirthDate.Designer.cs">
       <DependentUpon>201706161343551_RemoveRequiredBirthDate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\AgeValidation.cs" />
+    <Compile Include="Models\MinimumAgeValidation.cs" />
+    <Compile Include="Models\StockRangeValidation.cs" />
     <Compile Include="ViewModels\MovieFormViewModel.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="Global.asax.cs">
