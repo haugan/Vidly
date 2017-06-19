@@ -68,9 +68,8 @@ namespace Vidly.Controllers
             if (dbMovie == null)
                 return HttpNotFound($"Could not find movie with id {id} in database.");
 
-            var viewModel = new MovieFormViewModel()
+            var viewModel = new MovieFormViewModel(dbMovie)
             {
-                Movie = dbMovie,
                 Genres = _context.Genres.ToList()
             };
 
@@ -82,9 +81,8 @@ namespace Vidly.Controllers
         {
             var dbGenres = _context.Genres.ToList();
 
-            var viewModel = new MovieFormViewModel
+            var viewModel = new MovieFormViewModel()
             {
-                Movie = new Movie(), // Removes implicit MovieId validation in form (initializes default model values)
                 Genres = dbGenres
             };
 
@@ -98,9 +96,8 @@ namespace Vidly.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var viewModel = new MovieFormViewModel()
+                var viewModel = new MovieFormViewModel(movie)
                 {
-                    Movie = new Movie(),
                     Genres = _context.Genres.ToList()
                 };
 
