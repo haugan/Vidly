@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web.Mvc;
@@ -67,40 +68,43 @@ namespace Vidly.Controllers
             if (dbMovie == null)
                 return HttpNotFound($"Could not find movie with id {id} in database.");
 
-            var model = new MovieFormViewModel()
+            var viewModel = new MovieFormViewModel()
             {
                 Movie = dbMovie,
                 Genres = _context.Genres.ToList()
             };
 
-            return View("Form", model);
+            return View("Form", viewModel);
         }
 
         // GET: Movies/New
         public ActionResult New()
         {
             var dbGenres = _context.Genres.ToList();
-            var model = new MovieFormViewModel
+
+            var viewModel = new MovieFormViewModel
             {
-                Genres = dbGenres,
+                Genres = dbGenres
             };
 
-            return View("Form", model);
+            return View("Form", viewModel);
         }
 
         // POST: Movies/Save
         [HttpPost]
         public ActionResult Save(Movie movie) // Model binding 
         {
+            // ID DEFAULTS TO 0 AND INHERENTLY REQUIRED (FIX)
             if (movie.Id == 0)
+            {
+                movie.AddedDate = DateTime.Now;
                 _context.Movies.Add(movie);
+            }
             else
             {
-                var dbMovie = _context.Movies.Single(c => c.Id == movie.Id);
-
+                var dbMovie = _context.Movies.Single(m => m.Id == movie.Id);
                 dbMovie.Title = movie.Title;
                 dbMovie.ReleaseDate = movie.ReleaseDate;
-                dbMovie.AddedDate = movie.AddedDate;
                 dbMovie.Stock = movie.Stock;
                 dbMovie.GenreId = movie.GenreId;
             }

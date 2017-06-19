@@ -95,12 +95,13 @@ namespace Vidly.Controllers
             // VALIDATION OK
             if (!ModelState.IsValid)
             {
-                var model = new CustomerFormViewModel()
+                var viewModel = new CustomerFormViewModel()
                 {
                     Customer = customer,
                     MembershipTypes = _context.MembershipTypes.ToList()
                 };
-                return View("Form", model);
+
+                return View("Form", viewModel);
             }
 
             // ID DEFAULTS TO 0 AND INHERENTLY REQUIRED (FIX)

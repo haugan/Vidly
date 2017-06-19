@@ -15,12 +15,9 @@ namespace Vidly.Models
         [Required(ErrorMessage = "Release date is required.")]
         public DateTime ReleaseDate { get; set; }
 
-        [Display(Name = "Added date")]
-        [Required(ErrorMessage = "Added date is required.")]
         public DateTime AddedDate { get; set; }
 
         [StockRangeValidation]
-        [Required(ErrorMessage = "Stock is required.")]
         public int Stock { get; set; }
 
         [Required(ErrorMessage = "Genre is required.")]
