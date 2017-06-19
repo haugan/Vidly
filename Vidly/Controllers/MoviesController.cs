@@ -22,7 +22,7 @@ namespace Vidly.Controllers
             _context.Dispose();
         }
 
-        // GET: Movies
+        // GET: movies
         public ActionResult Index()
         {
             var dbMovies = _context.Movies
@@ -37,7 +37,7 @@ namespace Vidly.Controllers
             return View(model);
         }
 
-        // GET: Movies/Details/777
+        // GET: movies/details/777
         public ActionResult Details(int id)
         {
             var dbMovie = _context.Movies
@@ -60,7 +60,7 @@ namespace Vidly.Controllers
             return View(model);
         }
 
-        // GET: Movies/Edit/777
+        // GET: movies/edit/777
         public ActionResult Edit(int id)
         {
             var dbMovie = _context.Movies.SingleOrDefault(m => m.Id == id);
@@ -76,7 +76,7 @@ namespace Vidly.Controllers
             return View("Form", viewModel);
         }
 
-        // GET: Movies/New
+        // GET: movies/new
         public ActionResult New()
         {
             var dbGenres = _context.Genres.ToList();
@@ -89,7 +89,7 @@ namespace Vidly.Controllers
             return View("Form", viewModel);
         }
 
-        // POST: Movies/Save
+        // POST: movies/save
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Save(Movie movie) // Model binding 

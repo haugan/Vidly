@@ -20,7 +20,7 @@ namespace Vidly.Controllers
             _context.Dispose();
         }
 
-        // GET: Customers
+        // GET: customers
         public ActionResult Index()
         {
             // EAGER LOADING OF CUSTOMERS & LINKED MEMBERSHIP TYPE
@@ -36,7 +36,7 @@ namespace Vidly.Controllers
             return View(model);
         }
 
-        // GET: Customers/Details/777
+        // GET: customers/details/777
         public ActionResult Details(int id)
         {
             var dbCustomer = _context.Customers
@@ -57,7 +57,7 @@ namespace Vidly.Controllers
             return View(model);
         }
 
-        // GET: Customers/Edit/777
+        // GET: customers/edit/777
         public ActionResult Edit(int id)
         {
             var dbCustomer = _context.Customers.SingleOrDefault(c => c.Id == id);
@@ -74,7 +74,7 @@ namespace Vidly.Controllers
             return View("Form", model);
         }
 
-        // GET: Customers/New
+        // GET: customers/new
         public ActionResult New()
         {
             var dbMembershipTypes = _context.MembershipTypes.ToList();
@@ -87,7 +87,7 @@ namespace Vidly.Controllers
             return View("Form", model);
         }
 
-        // POST: Customers/Save
+        // POST: customers/save
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Save(Customer customer) // Model binding 
