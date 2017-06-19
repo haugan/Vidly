@@ -84,6 +84,7 @@ namespace Vidly.Controllers
 
             var viewModel = new MovieFormViewModel
             {
+                Movie = new Movie(), // Removes implicit MovieId validation in form (initializes default model values)
                 Genres = dbGenres
             };
 
