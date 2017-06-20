@@ -8,23 +8,23 @@ namespace Vidly.Controllers
 {
     public class CustomersController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _db;
 
         public CustomersController()
         {
-            _context = new ApplicationDbContext();
+            _db = new ApplicationDbContext();
         }
 
         protected override void Dispose(bool disposing)
         {
-            _context.Dispose();
+            _db.Dispose();
         }
 
         // GET: customers
         public ActionResult Index()
         {
             // EAGER LOADING OF CUSTOMERS & LINKED MEMBERSHIP TYPE
-            var dbCustomers = _context.Customers
+            var dbCustomers = _db.Customers
                 .Include(c => c.MembershipType)
                 .ToList();
 
@@ -39,7 +39,7 @@ namespace Vidly.Controllers
         // GET: customers/details/777
         public ActionResult Details(int id)
         {
-            var dbCustomer = _context.Customers
+            var dbCustomer = _db.Customers
                 .Include(c => c.MembershipType)
                 .SingleOrDefault(c => c.Id == id);
 
@@ -60,7 +60,7 @@ namespace Vidly.Controllers
         // GET: customers/edit/777
         public ActionResult Edit(int id)
         {
-            var dbCustomer = _context.Customers.SingleOrDefault(c => c.Id == id);
+            var dbCustomer = _db.Customers.SingleOrDefault(c => c.Id == id);
 
             if (dbCustomer == null)
                 return HttpNotFound($"Could not find customer with id {id} in database.");
@@ -68,7 +68,7 @@ namespace Vidly.Controllers
             var model = new CustomerFormViewModel()
             {
                 Customer = dbCustomer,
-                MembershipTypes = _context.MembershipTypes.ToList()
+                MembershipTypes = _db.MembershipTypes.ToList()
             };
 
             return View("Form", model);
@@ -77,7 +77,7 @@ namespace Vidly.Controllers
         // GET: customers/new
         public ActionResult New()
         {
-            var dbMembershipTypes = _context.MembershipTypes.ToList();
+            var dbMembershipTypes = _db.MembershipTypes.ToList();
             var model = new CustomerFormViewModel
             {
                 Customer = new Customer(), // Removes implicit CustomerId validation in form (initializes default model values)
@@ -98,7 +98,7 @@ namespace Vidly.Controllers
                 var viewModel = new CustomerFormViewModel()
                 {
                     Customer = customer,
-                    MembershipTypes = _context.MembershipTypes.ToList()
+                    MembershipTypes = _db.MembershipTypes.ToList()
                 };
 
                 return View("Form", viewModel);
@@ -106,10 +106,10 @@ namespace Vidly.Controllers
 
             // ID DEFAULTS TO 0 AND INHERENTLY REQUIRED (FIX)
             if (customer.Id == 0)
-                _context.Customers.Add(customer);
+                _db.Customers.Add(customer);
             else
             {
-                var dbCustomer = _context.Customers.Single(c => c.Id == customer.Id);
+                var dbCustomer = _db.Customers.Single(c => c.Id == customer.Id);
                 dbCustomer.Firstname = customer.Firstname;
                 dbCustomer.Lastname = customer.Lastname;
                 dbCustomer.BirthDate = customer.BirthDate;
@@ -118,7 +118,7 @@ namespace Vidly.Controllers
             }
             
             // SAVE TO DB AND RETURN
-            _context.SaveChanges();
+            _db.SaveChanges();
             return RedirectToAction("Index", "Customers");
         }
     }

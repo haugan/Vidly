@@ -203,10 +203,12 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\CustomersController.cs" />
+    <Compile Include="Controllers\Api\MoviesController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Dto\CustomerDto.cs" />
+    <Compile Include="Dto\MovieDto.cs" />
     <Compile Include="Migrations\201706161254299_AddRequired.cs" />
     <Compile Include="Migrations\201706161254299_AddRequired.Designer.cs">
       <DependentUpon>201706161254299_AddRequired.cs</DependentUpon>

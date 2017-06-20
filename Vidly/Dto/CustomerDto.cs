@@ -7,12 +7,10 @@ namespace Vidly.Dto
     {
         public int Id { get; set; }
 
-        [StringLength(255)]
-        [Required(ErrorMessage = "First name is required.")]
+        [Required]
         public string Firstname { get; set; }
 
-        [StringLength(255)]
-        [Required(ErrorMessage = "Last name is required.")]
+        [Required]
         public string Lastname { get; set; }
 
         //[MinimumAgeValidation] See custom validation class..
@@ -20,7 +18,7 @@ namespace Vidly.Dto
 
         public bool IsSubscribedToNewsletter { get; set; }
 
-        [Required(ErrorMessage = "Membership type is required.")]
+        [Required]
         public byte MembershipTypeId { get; set; }
     }
 }

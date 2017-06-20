@@ -12,11 +12,16 @@ namespace Vidly
     {
         protected void Application_Start()
         {
-            // TODO: Learn AutoMapper!
+            // TODO: Learn AutoMapper (configure in bootstrapper class?)
             Mapper.Initialize(cfg =>
             {
+                // DOMAIN TO DTO
                 cfg.CreateMap<Customer, CustomerDto>();
-                cfg.CreateMap<CustomerDto, Customer>();
+                cfg.CreateMap<Movie, MovieDto>();
+
+                // DTO TO DOMAIN
+                cfg.CreateMap<CustomerDto, Customer>().ForMember(c => c.Id, option => option.Ignore());
+                cfg.CreateMap<MovieDto, Movie>().ForMember(c => c.Id, option => option.Ignore());
             });
 
             // WEB API

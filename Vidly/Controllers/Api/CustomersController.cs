@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,80 +11,89 @@ namespace Vidly.Controllers.Api
 {
     public class CustomersController : ApiController
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _db;
 
         public CustomersController()
         {
-            _context = new ApplicationDbContext();
+            _db = new ApplicationDbContext();
         }
 
         protected override void Dispose(bool disposing)
         {
-            _context.Dispose();
+            _db.Dispose();
         }
 
         // GET: api/customers
-        public IEnumerable<CustomerDto> GetAllCustomers()
+        public IHttpActionResult GetAllCustomers()
         {
-            return _context.Customers.ToList().Select(Mapper.Map<Customer, CustomerDto>);
+            var dtos = _db.Customers.ToList().Select(Mapper.Map<Customer, CustomerDto>);
+            return Ok(dtos);
         }
 
-        // GET: api/customers/777
-        public CustomerDto GetSingleCustomer(int id)
+        // GET: api/customers/123
+        public IHttpActionResult GetSingleCustomer(int id)
         {
-            var customerDb = _context.Customers.SingleOrDefault(c => c.Id == id);
+            var dbCustomer = _db.Customers.SingleOrDefault(c => c.Id == id);
 
-            if (customerDb == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+            if (dbCustomer == null)
+                return NotFound();
 
-            return Mapper.Map<Customer, CustomerDto>(customerDb);
+            return Ok(Mapper.Map<Customer, CustomerDto>(dbCustomer));
         }
 
         // POST: api/customers
         [HttpPost]
-        public CustomerDto CreateCustomer(CustomerDto customerDto)
+        public IHttpActionResult CreateCustomer(CustomerDto dto)
         {
             if (!ModelState.IsValid)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return BadRequest();
 
-            var customer = Mapper.Map<CustomerDto, Customer>(customerDto);
-            _context.Customers.Add(customer);
-            _context.SaveChanges();
+            // AUTOMAP: <SourceType, DestinationType>(SourceObject)
+            var customer = Mapper.Map<CustomerDto, Customer>(dto);
 
-            // GET ID CREATED BY DATABASE AND ASSIGN TO DTO
-            customerDto.Id = customer.Id;
+            _db.Customers.Add(customer);
+            _db.SaveChanges();
 
-            return customerDto;
+            // GET CUSTOMER ID CREATED BY DATABASE & ASSIGN TO DTO
+            dto.Id = customer.Id;
+
+            // RETURN URI OF NEWLY CREATED OBJECT (HttpActionResult)
+            return Created(
+                new Uri($"{Request.RequestUri}/{customer.Id}"), // URI
+                dto); // Object
         }
 
-        // PUT: api/customers/777
+        // PUT: api/customers/123
         [HttpPut]
-        public void UpdateCustomer(int id, CustomerDto customerDto)
+        public IHttpActionResult UpdateCustomer(int id, CustomerDto dto)
         {
             if (!ModelState.IsValid)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return BadRequest();
+           
+            var dbCustomer = _db.Customers.SingleOrDefault(c => c.Id == id);
 
-            var customerDb = _context.Customers.SingleOrDefault(c => c.Id == id);
+            if (dbCustomer == null)
+                return NotFound();
 
-            if (customerDb == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+            // AUTOMAP: (SourceObject, DestinationObject)
+            Mapper.Map(dto, dbCustomer);
 
-            Mapper.Map(customerDto, customerDb);
-
-            _context.SaveChanges();
+            _db.SaveChanges();
+            return Ok();
         }
 
-        // DELETE: api/customers/777
+        // DELETE: api/customers/123
         [HttpDelete]
-        public void DeleteCustomer(int id)
+        public IHttpActionResult DeleteCustomer(int id)
         {
-            var customerDb = _context.Customers.SingleOrDefault(c => c.Id == id);
+            var dbCustomer = _db.Customers.SingleOrDefault(c => c.Id == id);
 
-            if (customerDb == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+            if (dbCustomer == null)
+                return NotFound();
 
-            _context.Customers.Remove(customerDb);
-            _context.SaveChanges();
+            _db.Customers.Remove(dbCustomer);
+            _db.SaveChanges();
+            return Ok();
         }
     }
 }
