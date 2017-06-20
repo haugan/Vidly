@@ -1,0 +1,38 @@
+﻿AutoMapper 6.1
+
+1)  Trenger både Source og Destination typer:
+	* AutoMapper funker best når Member-navna matcher.
+	* Source-navn "Firstname" mappes til Destination-navn "Firstname"
+	* AutoMapper ignorerer null reference exceptions ved mapping.
+
+2)	Når typene er lagd, kan jeg bygge et Map for dem via MapperConfiguration,
+	eller den statiske Mapper-instansen og CreateMap.
+	* Kun nødvendig med èn instanse av MapperConfiguration per AppDomain 
+	  og bør instansieres under startup.
+	* Alternativt; bruk statisk metode.
+
+	// STATISK
+	Mapper.Initialize(cfg => cfg.CreateMap<Order, OrderDto>());
+
+	// INSTANSIERT
+	var config = new MapperConfiguration(cfg => cfg.CreateMap<Order, OrderDto>());
+
+3)  Utfør mapping ved statiske eller instansierte Mapper-metoder:
+	
+	// STATISK
+	var mapper = config.CreateMapper();
+	
+	// INSTANSIERT
+	var mapper = new Mapper(config);
+	OrderDto dto = mapper.<OrderDto>(order);
+
+
+// KONFIGURASJON
+*  Dersom statisk Mapper-metode brukes, bør konfigurasjon skje i Global.asax (app_start)
+   (fordi den bare skal forekomme èn gang).
+*  Typisk, vil konfigurasjonens bootstrapper-klasse kalles fra startup-metoden.
+*  Bootstrapper-klassen kaller Mapper.Initialize og konfigurerer type maps.
+
+// TESTING
+*  Kall bootstrapper-klassen og bygg alle mappings.
+*  Kall MapperConfiguration.AssertConfigurationIsValid()

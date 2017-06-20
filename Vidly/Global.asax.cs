@@ -3,7 +3,6 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Vidly.App_Start;
 using Vidly.Dto;
 using Vidly.Models;
 
@@ -13,8 +12,8 @@ namespace Vidly
     {
         protected void Application_Start()
         {
-            // AUTO MAPPER
-            Mapper.Initialize(cfg => 
+            // TODO: Learn AutoMapper!
+            Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<Customer, CustomerDto>();
                 cfg.CreateMap<CustomerDto, Customer>();
