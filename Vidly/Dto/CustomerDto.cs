@@ -20,5 +20,8 @@ namespace Vidly.Dto
 
         [Required]
         public byte MembershipTypeId { get; set; }
+
+        // AVOID COUPLING WITH DOMAIN OBJECT
+        public MembershipTypeDto MembershipType { get; set; }
     }
 }

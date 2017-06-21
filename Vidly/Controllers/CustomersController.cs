@@ -23,17 +23,20 @@ namespace Vidly.Controllers
         // GET: customers
         public ActionResult Index()
         {
-            // EAGER LOADING OF CUSTOMERS & LINKED MEMBERSHIP TYPE
-            var dbCustomers = _db.Customers
-                .Include(c => c.MembershipType)
-                .ToList();
+            //// EAGER LOADING OF CUSTOMERS & LINKED MEMBERSHIP TYPE
+            //var dbCustomers = _db.Customers
+            //    .Include(c => c.MembershipType)
+            //    .ToList();
 
-            var model = new CustomersIndexViewModel
-            {
-                Customers = dbCustomers
-            };
+            //var model = new CustomersIndexViewModel
+            //{
+            //    Customers = dbCustomers
+            //};
 
-            return View(model);
+            //return View(model);
+
+            // TABLE DATA IS NOW CONSUMED BY jQUERY FROM THE WEB API
+            return View();
         }
 
         // GET: customers/details/777
@@ -116,7 +119,7 @@ namespace Vidly.Controllers
                 dbCustomer.MembershipTypeId = customer.MembershipTypeId;
                 dbCustomer.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
             }
-            
+
             // SAVE TO DB AND RETURN
             _db.SaveChanges();
             return RedirectToAction("Index", "Customers");

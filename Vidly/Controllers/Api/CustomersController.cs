@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using System;
-using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web.Http;
 using Vidly.Dto;
 using Vidly.Models;
@@ -26,7 +25,12 @@ namespace Vidly.Controllers.Api
         // GET: api/customers
         public IHttpActionResult GetAllCustomers()
         {
-            var dtos = _db.Customers.ToList().Select(Mapper.Map<Customer, CustomerDto>);
+            // EAGER LOAD HIERARCHICAL TYPE FOR DATATABLE CONSUMPTION THROUGH WEB API
+            var dtos = _db.Customers
+                .Include(c => c.MembershipType)
+                .ToList()
+                .Select(Mapper.Map<Customer, CustomerDto>);
+
             return Ok(dtos);
         }
 
