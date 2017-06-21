@@ -1,6 +1,6 @@
 # Vidly
 I'm building a RESTful web application that performs CRUD operations to a SQL database, 
-in classic ASP.NET (plus some nice libraries) in order to dwelve deeper and more fully understand 
+in "classic" ASP.NET (plus some nice JavaScript libraries) in order to dwelve deeper and more fully understand 
 the foundation ASP.NET Core was built upon, following a great course on Udemy from Mosh Hamedani.
 
 
