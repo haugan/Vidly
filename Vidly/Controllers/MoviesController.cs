@@ -25,16 +25,18 @@ namespace Vidly.Controllers
         // GET: movies
         public ActionResult Index()
         {
-            var dbMovies = _db.Movies
-                .Include(m => m.Genre)
-                .ToList();
+            // EAGER LOADING OF CUSTOMERS & LINKED MEMBERSHIP TYPE
+            //var dbMovies = _db.Movies
+            //    .Include(m => m.Genre)
+            //    .ToList();
+            //var model = new MoviesIndexViewModel
+            //{
+            //    Movies = dbMovies
+            //};
+            //return View(model);
 
-            var model = new MoviesIndexViewModel
-            {
-                Movies = dbMovies
-            };
-
-            return View(model);
+            // TABLE DATA IS NOW CONSUMED BY jQUERY FROM THE WEB API
+            return View();
         }
 
         // GET: movies/details/777

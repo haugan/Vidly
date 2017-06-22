@@ -23,7 +23,7 @@ namespace Vidly.Controllers
         // GET: customers
         public ActionResult Index()
         {
-            //// EAGER LOADING OF CUSTOMERS & LINKED MEMBERSHIP TYPE
+            // EAGER LOADING OF CUSTOMERS & LINKED MEMBERSHIP TYPE
             //var dbCustomers = _db.Customers
             //    .Include(c => c.MembershipType)
             //    .ToList();

@@ -1,35 +1,113 @@
 ﻿@model Vidly.ViewModels.MoviesIndexViewModel
 @{
-    ViewBag.Title = "Movie index";
+    ViewBag.Title = "Movies";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<!--RAZOR-->
 <div class="container">
     <h2>Movies</h2>
     @Html.ActionLink("Create new movie", "New", "Movies")
     <hr />
-    @if (Model.Movies.Count < 1)
-    {
-        <text>There's no registered movies.</text>
-    }
-    else
-    {
-        <table class="table table-striped table-responsive table-hover">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Genre</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var movie in Model.Movies)
-                {
-                    <tr>
-                        <td>@Html.ActionLink(movie.Title, "Edit", "Movies", new { id = movie.Id }, null)</td>
-                        <td>@movie.Genre.Name</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
+    <!--IF NO CUSTOMERS IN DB, USE DATATABLES PLUGIN (OR jQUERY) TO INFORM THE USER-->
+    <table id="table-movies" class="table table-striped table-responsive table-hover">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Genre</th>
+                <th><span class="glyphicon glyphicon-trash"></span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--RENDERED ON CLIENT BY jQUERY CONSUMING RESTFUL WEB SERVICE (API)-->
+        </tbody>
+    </table>
+
 </div>
+
+<!--jQUERY-->
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+
+            // STORE IN VAR FOR FUTURE REMOVAL OF ROWS FROM INTERNAL TABLE LIST
+            var table = $("#table-movies").DataTable({
+
+                // WEB API AS DATA SOURCE
+                ajax: {
+                    url: "/api/movies",
+                    dataSrc: "" // API returns array of objects directly to table
+                },
+
+                // CUSTOM TABLE ROWS RENDERING
+                columns: [
+                    {
+                        // TITLE
+                        data: "title",
+                        render: function (data, type, movie) {
+                            return `<a href="/movies/edit/${movie.id}">${movie.title}</a>`; // ES6 Template strings
+                        }
+                    },
+                    {
+                        // GENRE
+                        data: "genre.name"
+                    },
+                    {
+                        // MOVIE ID (DELETE)
+                        data: "id",
+                        render: function (data) {
+                            return `<button class='btn-link js-delete' data-movie-id=${data}>Delete</button>`
+                        }
+                    }
+                ],
+
+                // DATATABLE VIEW CONFIG
+                //scrollY: 320,
+                pageLength: 10,
+
+                "columnDefs": [{
+                    "orderable": false,
+                    "targets": 2
+                }]
+
+            });
+
+            // DELETE ROW FROM DATABASE AND INTERNAL DATATABLE LIST
+            $("#table-movies").on("click", ".js-delete", function () {
+                var btn = $(this);
+
+                bootbox.confirm({ // Bootbox library
+                    title: "Delete this movie?",
+                    message: "This action will remove the movie from the database and can not be undone!",
+                    size: 'small',
+                    buttons: {
+                        confirm: {
+                            label: '<span class="glyphicon glyphicon-trash"></span> Delete',
+                            className: 'btn-danger'
+                        },
+                        cancel: {
+                            label: '<span class="glyphicon glyphicon-ban-circle"></span> Cancel',
+                            className: 'btn-primary'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            // CALL BACK END API (SHOULD BE SEPERATED)
+                            $.ajax({
+                                url: `/api/movies/${btn.attr("data-movie-id")}`,
+                                method: "DELETE",
+                                success: function () {
+                                    // DELETE FROM INTERNAL LIST & REDRAW TABLE
+                                    table.row(btn.parents("tr")).remove().draw();
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+
+        })
+
+    </script>
+}

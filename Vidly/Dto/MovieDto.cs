@@ -20,5 +20,8 @@ namespace Vidly.Dto
 
         [Required]
         public byte GenreId { get; set; }
+
+        // AVOID COUPLING WITH DOMAIN OBJECT
+        public GenreDto Genre { get; set; }
     }
 }

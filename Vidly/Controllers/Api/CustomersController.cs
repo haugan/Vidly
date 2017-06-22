@@ -25,7 +25,7 @@ namespace Vidly.Controllers.Api
         // GET: api/customers
         public IHttpActionResult GetAllCustomers()
         {
-            // EAGER LOAD HIERARCHICAL TYPE FOR DATATABLE CONSUMPTION THROUGH WEB API
+            // EAGER LOAD HIERARCHICAL TYPE ("INCLUDE") FOR DATATABLE CONSUMPTION THROUGH WEB API
             var dtos = _db.Customers
                 .Include(c => c.MembershipType)
                 .ToList()
