@@ -1,0 +1,37 @@
+﻿1) Register new account in template setup ("guest@domain.net/pSW0Rd.123")
+
+2) In AccountController.cs, Register() method:
+
+	// TEMP: Create new role
+	var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+	var roleManager = new RoleManager<IdentityRole>(roleStore);
+	await roleManager.CreateAsync(new IdentityRole("NameOfRole"));
+
+	// TEMP: Assign user to role
+	await UserManager.AddToRoleAsync(user.Id, "NameOfRole");
+
+3) Create new account which is automatically given new role ("admin@domain.net/pSW0Rd.123")
+
+4) Create new Entity Framework (EF) migration, in Package Manager Console (PMC):
+	
+	add-migration SeedUsersAndRoles
+
+5) View Data in User, Roles, and UserRoles Identity tables.
+   Select rows to "seed", click Script.
+   Copy scripts.
+
+6) Add scripts to Up() method of new Migration class "SeedUsersAndRoles":
+
+    Sql(@"
+   
+       INSERT INTO **scripts goes here**
+       INSERT INTO **scripts goes here**
+
+    ");
+
+7) Delete old records in Identity tables.
+
+8) Update database with EF, in PMC:
+	
+    update-database
+   

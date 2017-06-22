@@ -219,6 +219,10 @@
     <Compile Include="Migrations\201706161343551_RemoveRequiredBirthDate.Designer.cs">
       <DependentUpon>201706161343551_RemoveRequiredBirthDate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706221119043_SeedUsers.cs" />
+    <Compile Include="Migrations\201706221119043_SeedUsers.Designer.cs">
+      <DependentUpon>201706221119043_SeedUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\MinimumAgeValidation.cs" />
     <Compile Include="ViewModels\MovieFormViewModel.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
@@ -445,6 +449,7 @@
     <Content Include="Content\DataTables\media\images\sort_both.png" />
     <Content Include="Content\DataTables\media\images\sort_desc.png" />
     <Content Include="Content\DataTables\media\images\sort_desc_disabled.png" />
+    <Content Include="CreatingAndSeedingUsersAndRoles.txt" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -660,6 +665,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706161343551_RemoveRequiredBirthDate.resx">
       <DependentUpon>201706161343551_RemoveRequiredBirthDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706221119043_SeedUsers.resx">
+      <DependentUpon>201706221119043_SeedUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
