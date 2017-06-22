@@ -22,3 +22,9 @@ Make your users think twice before doing something they (maybe) shouldn't -
 easily customizable prompts using the Bootbox library for jQuery!
 
 ![Important action confirmation prompt](https://s9.postimg.org/n049d0een/vidly3.png)
+
+### Different users, different roles
+It's important to give different users different responsibilites and authorizations - 
+this is taken care of by carefully configuring the app using the ASP.NET Identity framework!
+
+![Guest users don't have access to certain actions](https://s30.postimg.org/oxtsliich/vidly4.png)
