@@ -1,7 +1,7 @@
 # Vidly
 I'm building a RESTful web application that performs CRUD operations to a SQL database through Entity Framework, 
 in "classic" ASP.NET MVC (plus some nice JavaScript libraries) in order to dwelve deeper and more fully understand 
-the foundation ASP.NET Core was built upon and further improve on my web development chops (partly following a great course on Udemy from Mosh Hamedani). The web app will in part be architectured like a Single Page Application (SPA) utilizing ASP.NET Web API (on the server), creating APIs that get "consumed" by jQuery AJAX (on the client). Future updates will work towards making the entire web app a SPA with client-side Angular 4, and all security related authentication and authorization of users will be handled by ASP.NET Identity.
+the foundation ASP.NET Core was built upon and further improve on my web development chops (partly following a great course on Udemy from Mosh Hamedani). The web app is architectured like a Single Page Application (SPA) utilizing ASP.NET Web API (on the server), creating APIs that get "consumed" by jQuery AJAX (on the client). Future updates will work towards implementing client-side Angular 4; all security related authentication and authorization of users will be handled by ASP.NET Identity.
 
 
 
