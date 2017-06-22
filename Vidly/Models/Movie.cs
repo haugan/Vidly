@@ -11,13 +11,11 @@ namespace Vidly.Models
         [Required(ErrorMessage = "Title is required.")]
         public string Title { get; set; }
 
-        [Display(Name = "Release date")]
         [Required(ErrorMessage = "Release date is required.")]
         public DateTime ReleaseDate { get; set; }
 
         public DateTime AddedDate { get; set; }
 
-        [Display(Name = "Stock amount")]
         [Range(1, 20, ErrorMessage = "Stock amount must be between 1 and 20.")]
         [Required(ErrorMessage = "Stock amount is required.")]
         public int Stock { get; set; }

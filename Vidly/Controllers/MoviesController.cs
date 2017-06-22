@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data.Entity;
-using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web.Mvc;
 using Vidly.Models;
@@ -25,18 +24,10 @@ namespace Vidly.Controllers
         // GET: movies
         public ActionResult Index()
         {
-            // EAGER LOADING OF CUSTOMERS & LINKED MEMBERSHIP TYPE
-            //var dbMovies = _db.Movies
-            //    .Include(m => m.Genre)
-            //    .ToList();
-            //var model = new MoviesIndexViewModel
-            //{
-            //    Movies = dbMovies
-            //};
-            //return View(model);
+            if (User.IsInRole(RoleName.MovieManager))
+                return View("TableFull");
 
-            // TABLE DATA IS NOW CONSUMED BY jQUERY FROM THE WEB API
-            return View();
+            return View("TableReadOnly");
         }
 
         // GET: movies/details/777
@@ -63,6 +54,7 @@ namespace Vidly.Controllers
         }
 
         // GET: movies/edit/777
+        [Authorize(Roles = RoleName.MovieManager)]
         public ActionResult Edit(int id)
         {
             var dbMovie = _db.Movies.SingleOrDefault(m => m.Id == id);
@@ -79,6 +71,7 @@ namespace Vidly.Controllers
         }
 
         // GET: movies/new
+        [Authorize(Roles = RoleName.MovieManager)]
         public ActionResult New()
         {
             var dbGenres = _db.Genres.ToList();
@@ -94,6 +87,7 @@ namespace Vidly.Controllers
         // POST: movies/save
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.MovieManager)]
         public ActionResult Save(Movie movie) // Model binding 
         {
             if (!ModelState.IsValid)

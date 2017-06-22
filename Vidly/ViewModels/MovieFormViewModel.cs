@@ -40,9 +40,11 @@ namespace Vidly.ViewModels
         public string Title { get; set; }
 
         // MOVIE RELEASE DATE
+        [Display(Name = "Release date")]
         public DateTime? ReleaseDate { get; set; } // Nullable type initializes to null (default: 01-01-2001)
 
         // MOVIE STOCK AMOUNT
+        [Display(Name = "Stock amount")]
         public int? Stock { get; set; } // Nullable type initializes to null (default: 0)
 
         // GENRE ID
