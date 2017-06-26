@@ -7,12 +7,12 @@ namespace Vidly.Models
     {
         public int Id { get; set; }
 
-        [Display(Name = "First name")]
+        [Display(Name = "Fornavn")]
         [StringLength(255)]
         [Required(ErrorMessage = "First name is required.")]
         public string Firstname { get; set; }
 
-        [Display(Name = "Last name")]
+        [Display(Name = "Etternavn")]
         [StringLength(255)]
         [Required(ErrorMessage = "Last name is required.")]
         public string Lastname { get; set; }
