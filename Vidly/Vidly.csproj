@@ -227,9 +227,9 @@
     <Compile Include="Migrations\201706261020030_AddEmployeeNumberToApplicationUser.Designer.cs">
       <DependentUpon>201706261020030_AddEmployeeNumberToApplicationUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706261339338_AddedPhoneNumberToApplicationUser.cs" />
-    <Compile Include="Migrations\201706261339338_AddedPhoneNumberToApplicationUser.Designer.cs">
-      <DependentUpon>201706261339338_AddedPhoneNumberToApplicationUser.cs</DependentUpon>
+    <Compile Include="Migrations\201706261438441_AddPhoneNumberToApplicationUser.cs" />
+    <Compile Include="Migrations\201706261438441_AddPhoneNumberToApplicationUser.Designer.cs">
+      <DependentUpon>201706261438441_AddPhoneNumberToApplicationUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\MinimumAgeValidation.cs" />
@@ -698,8 +698,8 @@
     <EmbeddedResource Include="Migrations\201706261020030_AddEmployeeNumberToApplicationUser.resx">
       <DependentUpon>201706261020030_AddEmployeeNumberToApplicationUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706261339338_AddedPhoneNumberToApplicationUser.resx">
-      <DependentUpon>201706261339338_AddedPhoneNumberToApplicationUser.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706261438441_AddPhoneNumberToApplicationUser.resx">
+      <DependentUpon>201706261438441_AddPhoneNumberToApplicationUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

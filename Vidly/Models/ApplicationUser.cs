@@ -15,9 +15,9 @@ namespace Vidly.Models
         public int EmployeeNumber { get; set; }
 
         // PHONE NUMBER
-        [Display(Name = "Phone #")]
-        [Required(ErrorMessage = "Phone number is required.")]
-        public int Phone { get; set; }
+        [StringLength(50)]
+        [Required(ErrorMessage = "Phone # is required.")]
+        public string Phone { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

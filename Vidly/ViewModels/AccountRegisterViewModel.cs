@@ -5,12 +5,10 @@ namespace Vidly.ViewModels
     public class AccountRegisterViewModel
     {
         [Display(Name = "Employee #")]
-        [Required(ErrorMessage = "Employee # is required.")]
         public int EmployeeNumber { get; set; }
 
         [Display(Name = "Phone #")]
-        [Required(ErrorMessage = "Phone # is required.")]
-        public int Phone { get; set; }
+        public string Phone { get; set; }
 
         [Display(Name = "Email")]
         [Required(ErrorMessage = "Email is required.")]
