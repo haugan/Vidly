@@ -227,8 +227,26 @@
     <Compile Include="Migrations\201706261020030_AddEmployeeNumberToApplicationUser.Designer.cs">
       <DependentUpon>201706261020030_AddEmployeeNumberToApplicationUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706261339338_AddedPhoneNumberToApplicationUser.cs" />
+    <Compile Include="Migrations\201706261339338_AddedPhoneNumberToApplicationUser.Designer.cs">
+      <DependentUpon>201706261339338_AddedPhoneNumberToApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\MinimumAgeValidation.cs" />
     <Compile Include="Models\RoleName.cs" />
+    <Compile Include="ViewModels\AccountExternalLoginConfirmationViewModel.cs" />
+    <Compile Include="ViewModels\AccountExternalLoginListViewModel.cs" />
+    <Compile Include="ViewModels\AccountForgotPasswordViewModel.cs" />
+    <Compile Include="ViewModels\AccountForgotViewModel.cs" />
+    <Compile Include="ViewModels\AccountLoginViewModel.cs" />
+    <Compile Include="ViewModels\ManageAddPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\ManageChangePasswordViewModel.cs" />
+    <Compile Include="ViewModels\ManageConfigureTwoFactorViewModel.cs" />
+    <Compile Include="ViewModels\ManageFactorViewModel.cs" />
+    <Compile Include="ViewModels\ManageIndexViewModel.cs" />
+    <Compile Include="ViewModels\ManageLoginsViewModel.cs" />
+    <Compile Include="ViewModels\ManageSetPasswordViewModel.cs" />
+    <Compile Include="ViewModels\ManageVerifyPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\MovieFormViewModel.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -279,11 +297,9 @@
       <DependentUpon>201706140911144_AddMovieAndGenreTables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Genre.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -293,6 +309,10 @@
     <Compile Include="ViewModels\CustomerFormViewModel.cs" />
     <Compile Include="ViewModels\MovieDetailsViewModel.cs" />
     <Compile Include="ViewModels\MovieIndexViewModel.cs" />
+    <Compile Include="ViewModels\AccountRegisterViewModel.cs" />
+    <Compile Include="ViewModels\AccountResetPasswordViewModel.cs" />
+    <Compile Include="ViewModels\AccountSendCodeViewModel.cs" />
+    <Compile Include="ViewModels\AccountVerifyCodeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-flatly.css" />
@@ -677,6 +697,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706261020030_AddEmployeeNumberToApplicationUser.resx">
       <DependentUpon>201706261020030_AddEmployeeNumberToApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706261339338_AddedPhoneNumberToApplicationUser.resx">
+      <DependentUpon>201706261339338_AddedPhoneNumberToApplicationUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
