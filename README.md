@@ -1,7 +1,7 @@
 # Vidly
 I'm building a RESTful web application that performs CRUD operations to a SQL database through Entity Framework, 
 in "classic" ASP.NET MVC (plus some nice JavaScript libraries) in order to dwelve deeper and more fully understand 
-the foundation ASP.NET Core was built upon and further improve on my web development chops (partly following a great course on Udemy from Mosh Hamedani). The web app is architectured like a Single Page Application (SPA) utilizing ASP.NET Web API (on the server), creating APIs that get "consumed" by jQuery AJAX (on the client). Future updates will work towards implementing client-side Angular 4; all security related authentication and authorization of users will be handled by ASP.NET Identity.
+the foundation ASP.NET Core was built upon and further improve on my web development chops (partly following a great course on Udemy from Mosh Hamedani). The web app is architectured like a Single Page Application (SPA) utilizing ASP.NET Web API (on the server), creating APIs that get "consumed" by jQuery AJAX (on the client). Future updates will work towards implementing client-side Angular 4; all security related authentication and authorization of users is handled by ASP.NET Identity.
 
 
 
@@ -22,3 +22,9 @@ Make your users think twice before doing something they (maybe) shouldn't -
 easily customizable prompts using the Bootbox library for jQuery!
 
 ![Important action confirmation prompt](https://s9.postimg.org/n049d0een/vidly3.png)
+
+### Different users, different roles
+It's important to give different users different responsibilites and authorizations - 
+this is taken care of by carefully configuring the app using the ASP.NET Identity framework!
+
+![Guest users don't have access to certain actions](https://s30.postimg.org/oxtsliich/vidly4.png)
