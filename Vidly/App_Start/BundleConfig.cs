@@ -4,7 +4,7 @@ namespace Vidly
 {
     public class BundleConfig
     {
-        // Bundling: https://go.microsoft.com/fwlink/?LinkId=301862
+        // READ MORE ON BUNDLING (COMBINE & COMPRESS LIBS): https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
             // JAVASCRIPT LIBRARIES
