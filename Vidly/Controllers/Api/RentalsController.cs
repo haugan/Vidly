@@ -20,10 +20,13 @@ namespace Vidly.Controllers.Api
             _db.Dispose();
         }
 
+        // POST: api/rentals
         [HttpPost]
         public IHttpActionResult CreateRental(RentalDto dto)
         {
             var customer = _db.Customers.Single(c => c.Id == dto.CustomerId);
+
+            // SELECT * FROM Movies IN (1,2,3,4)
             var movies = _db.Movies.Where(m => dto.MovieIds.Contains(m.Id)).ToList();
 
             foreach (var movie in movies)

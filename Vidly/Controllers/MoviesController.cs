@@ -112,11 +112,12 @@ namespace Vidly.Controllers
                 dbMovie.Title = movie.Title;
                 dbMovie.ReleaseDate = movie.ReleaseDate;
                 dbMovie.AmountInStock = movie.AmountInStock;
+                dbMovie.AmountAvailable = movie.AmountAvailable;
                 dbMovie.GenreId = movie.GenreId;
             }
 
+            // SAVE TO DB AND RETURN
             _db.SaveChanges();
-
             return RedirectToAction("Index", "Movies");
         }
     }

@@ -25,15 +25,15 @@
     <!--RELEASE DATE-->
     <div class="form-group">
         @Html.LabelFor(m => m.ReleaseDate)
-        @Html.TextBoxFor(m => m.ReleaseDate, "{0:d MMM yyyy}", new { placeholder = "01 01 2001", @class = "form-control" })
+        @Html.TextBoxFor(m => m.ReleaseDate, "{0:d MMM yyyy}", new { placeholder = "12 01 2001", @class = "form-control" })
         @Html.ValidationMessageFor(m => m.ReleaseDate)
     </div>
 
     <!--STOCK-->
     <div class="form-group">
-        @Html.LabelFor(m => m.Stock)
-        @Html.TextBoxFor(m => m.Stock, new { placeholder = "Amount in stock", @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Stock)
+        @Html.LabelFor(m => m.AmountInStock)
+        @Html.TextBoxFor(m => m.AmountInStock, new { placeholder = "Amount in stock", @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.AmountInStock)
     </div>
 
     <!--GENRE-->

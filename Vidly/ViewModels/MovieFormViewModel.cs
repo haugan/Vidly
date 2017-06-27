@@ -20,7 +20,7 @@ namespace Vidly.ViewModels
             Id = movie.Id;
             Title = movie.Title;
             ReleaseDate = movie.ReleaseDate;
-            Stock = movie.AmountInStock;
+            AmountInStock = movie.AmountInStock;
             GenreId = movie.GenreId;
         }
 
@@ -44,8 +44,8 @@ namespace Vidly.ViewModels
         public DateTime? ReleaseDate { get; set; } // Nullable type initializes to null (default: 01-01-2001)
 
         // MOVIE STOCK AMOUNT
-        [Display(Name = "Stock amount")]
-        public int? Stock { get; set; } // Nullable type initializes to null (default: 0)
+        [Display(Name = "Amt. in stock")]
+        public int? AmountInStock { get; set; } // Nullable type initializes to null (default: 0)
 
         // GENRE ID
         public byte? GenreId { get; set; } // Nullable type initializes to null (default: 0)

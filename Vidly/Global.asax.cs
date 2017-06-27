@@ -16,11 +16,11 @@ namespace Vidly
             Mapper.Initialize(cfg =>
             {
                 // DOMAIN TO DTO
-                cfg.CreateMap<Rental, RentalDto>();
                 cfg.CreateMap<Customer, CustomerDto>();
-                cfg.CreateMap<MembershipType, MembershipTypeDto>();
                 cfg.CreateMap<Movie, MovieDto>();
+                cfg.CreateMap<MembershipType, MembershipTypeDto>();
                 cfg.CreateMap<Genre, GenreDto>();
+                cfg.CreateMap<Rental, RentalDto>();
 
                 // DTO TO DOMAIN
                 cfg.CreateMap<CustomerDto, Customer>().ForMember(c => c.Id, option => option.Ignore());
