@@ -16,7 +16,9 @@ namespace Vidly.Dto
         public DateTime AddedDate { get; set; }
 
         [Range(1, 20)]
-        public int Stock { get; set; }
+        public int AmountInStock { get; set; }
+
+        public int AmountAvailable { get; set; }
 
         [Required]
         public byte GenreId { get; set; }

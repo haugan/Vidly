@@ -219,6 +219,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\CustomersController.cs" />
     <Compile Include="Controllers\Api\MoviesController.cs" />
+    <Compile Include="Controllers\Api\RentalsController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -226,6 +227,7 @@
     <Compile Include="Dto\GenreDto.cs" />
     <Compile Include="Dto\MembershipTypeDto.cs" />
     <Compile Include="Dto\MovieDto.cs" />
+    <Compile Include="Dto\RentalDto.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Migrations\201706161254299_AddRequired.cs" />
     <Compile Include="Migrations\201706161254299_AddRequired.Designer.cs">
@@ -251,8 +253,21 @@
     <Compile Include="Migrations\201706270806264_SeedSuperUser.Designer.cs">
       <DependentUpon>201706270806264_SeedSuperUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706271110037_AddRentalsTableToDB.cs" />
+    <Compile Include="Migrations\201706271110037_AddRentalsTableToDB.Designer.cs">
+      <DependentUpon>201706271110037_AddRentalsTableToDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706271113008_RenamedAndAddedPropertiesToMovieModel.cs" />
+    <Compile Include="Migrations\201706271113008_RenamedAndAddedPropertiesToMovieModel.Designer.cs">
+      <DependentUpon>201706271113008_RenamedAndAddedPropertiesToMovieModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706271119230_SeedAmountAvailableInMovies.cs" />
+    <Compile Include="Migrations\201706271119230_SeedAmountAvailableInMovies.Designer.cs">
+      <DependentUpon>201706271119230_SeedAmountAvailableInMovies.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\MinimumAgeValidation.cs" />
+    <Compile Include="Models\Rental.cs" />
     <Compile Include="Models\RoleName.cs" />
     <Compile Include="ViewModels\AccountExternalLoginConfirmationViewModel.cs" />
     <Compile Include="ViewModels\AccountExternalLoginListViewModel.cs" />
@@ -724,6 +739,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706270806264_SeedSuperUser.resx">
       <DependentUpon>201706270806264_SeedSuperUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706271110037_AddRentalsTableToDB.resx">
+      <DependentUpon>201706271110037_AddRentalsTableToDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706271113008_RenamedAndAddedPropertiesToMovieModel.resx">
+      <DependentUpon>201706271113008_RenamedAndAddedPropertiesToMovieModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706271119230_SeedAmountAvailableInMovies.resx">
+      <DependentUpon>201706271119230_SeedAmountAvailableInMovies.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

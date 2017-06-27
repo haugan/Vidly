@@ -45,7 +45,7 @@ namespace Vidly.Controllers
                 Title = dbMovie.Title,
                 ReleaseDate = dbMovie.ReleaseDate,
                 AddedDate = dbMovie.AddedDate,
-                Stock = dbMovie.Stock,
+                AmountInStock = dbMovie.AmountInStock,
                 Genre = dbMovie.Genre
             };
 
@@ -111,7 +111,7 @@ namespace Vidly.Controllers
                 var dbMovie = _db.Movies.Single(m => m.Id == movie.Id);
                 dbMovie.Title = movie.Title;
                 dbMovie.ReleaseDate = movie.ReleaseDate;
-                dbMovie.Stock = movie.Stock;
+                dbMovie.AmountInStock = movie.AmountInStock;
                 dbMovie.GenreId = movie.GenreId;
             }
 

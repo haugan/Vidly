@@ -51,7 +51,7 @@ namespace Vidly.Controllers.Api
         public IHttpActionResult CreateMovie(MovieDto dto)
         {
             if (!ModelState.IsValid)
-                return BadRequest();
+                return BadRequest("Model state is not valid!");
 
             // AUTOMAP: <SourceType, DestinationType>(SourceObject)
             var movie = Mapper.Map<MovieDto, Movie>(dto);

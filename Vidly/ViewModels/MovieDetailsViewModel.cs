@@ -10,6 +10,6 @@ namespace Vidly.ViewModels
         public Genre Genre { get; set; }
         public DateTime ReleaseDate { get; set; }
         public DateTime AddedDate { get; set; }
-        public int Stock { get; set; }
+        public int AmountInStock { get; set; }
     }
 }

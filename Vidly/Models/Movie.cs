@@ -18,7 +18,9 @@ namespace Vidly.Models
 
         [Range(1, 20, ErrorMessage = "Stock amount must be between 1 and 20.")]
         [Required(ErrorMessage = "Stock amount is required.")]
-        public int Stock { get; set; }
+        public int AmountInStock { get; set; }
+
+        public int AmountAvailable { get; set; }
 
         [Required(ErrorMessage = "Genre is required.")]
         public byte GenreId { get; set; }
