@@ -3,16 +3,16 @@
     ViewBag.Title = "User form";
 }
 
-<h2>New user</h2>
-<hr />
+<h2>Register new user</h2>
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-vertical", role = "form" }))
 {
     <!--ANTI CSRF-->
     @Html.AntiForgeryToken()
+    @*@Html.ValidationSummary(true, "Oops! Something went wrong..", new { @class = "text-danger" })*@
 
-    <!--ERROR MESSAGE SUMMARY-->
-    @Html.ValidationSummary(true, "Oops! Something went wrong..", new { @class = "text-danger" })
+    <h4>Fill out the form fields and click register.</h4>
+    <hr />
 
     <!--EMPLOYEE #-->
     <div class="form-group">
@@ -52,7 +52,7 @@
     <!--SUBMIT-->
     <br />
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary">Register</button>
     </div>
 }
 

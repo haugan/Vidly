@@ -61,6 +61,7 @@ namespace Vidly.Controllers
         }
 
         // GET: customers/edit/777
+        [Authorize(Roles = RoleName.CustomerManager)]
         public ActionResult Edit(int id)
         {
             var dbCustomer = _db.Customers.SingleOrDefault(c => c.Id == id);
@@ -78,6 +79,7 @@ namespace Vidly.Controllers
         }
 
         // GET: customers/new
+        [Authorize(Roles = RoleName.CustomerManager)]
         public ActionResult New()
         {
             var dbMembershipTypes = _db.MembershipTypes.ToList();
@@ -93,6 +95,7 @@ namespace Vidly.Controllers
         // POST: customers/save
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.CustomerManager)]
         public ActionResult Save(Customer customer) // Model binding 
         {
             // VALIDATION OK

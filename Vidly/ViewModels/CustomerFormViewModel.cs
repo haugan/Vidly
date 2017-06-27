@@ -14,9 +14,9 @@ namespace Vidly.ViewModels
             get
             {
                 if (Customer != null && Customer.Id != 0)
-                    return "Edit customer";
+                    return "Edit existing customer";
                 else
-                    return "New customer";
+                    return "Create new customer";
             }
         }
 

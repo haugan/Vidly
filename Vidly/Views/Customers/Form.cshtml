@@ -5,16 +5,15 @@
 }
 
 <h2>@Model.PageHeader</h2>
-<hr />
 
 <!--DISPOSE FORM OBJECT WHEN EXITING BLOCK-->
 @using (Html.BeginForm("Save", "Customers", FormMethod.Post, new { @class = "form-vertical", role = "form" }))
 {
+    @Html.AntiForgeryToken()
+    @*@Html.ValidationSummary(true, "Oops! Something went wrong..", new { @class = "text-danger" })*@
 
-    <!--ERROR MESSAGE SUMMARY-->
-    @Html.ValidationSummary(true, "Oops! Something went wrong..", new { @class = "text-danger" })
-
-    <br />
+    <h4>Fill out the form fields and click save.</h4>
+    <hr />
 
     <!--FIRST NAME-->
     <div class="form-group">
@@ -54,17 +53,11 @@
     <!--HIDDEN FIELD-->
     @Html.HiddenFor(m => m.Customer.Id)
 
-    <!--ANTI CSRF-->
-    @Html.AntiForgeryToken()
-
     <!--SUBMIT-->
     <br />
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Save</button>
-    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
 }
 
-@section scripts
-{
+@section scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

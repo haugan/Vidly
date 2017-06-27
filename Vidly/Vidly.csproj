@@ -231,6 +231,10 @@
     <Compile Include="Migrations\201706261438441_AddPhoneNumberToApplicationUser.Designer.cs">
       <DependentUpon>201706261438441_AddPhoneNumberToApplicationUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706270806264_SeedSuperUser.cs" />
+    <Compile Include="Migrations\201706270806264_SeedSuperUser.Designer.cs">
+      <DependentUpon>201706270806264_SeedSuperUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\MinimumAgeValidation.cs" />
     <Compile Include="Models\RoleName.cs" />
@@ -478,6 +482,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Migrations\Todo.txt" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -700,6 +705,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706261438441_AddPhoneNumberToApplicationUser.resx">
       <DependentUpon>201706261438441_AddPhoneNumberToApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706270806264_SeedSuperUser.resx">
+      <DependentUpon>201706270806264_SeedSuperUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

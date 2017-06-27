@@ -29,7 +29,7 @@ namespace Vidly.ViewModels
         {
             get
             {
-                return (Id != 0) ? "Edit movie" : "New movie";
+                return (Id != 0) ? "Edit existing movie" : "Register new movie";
             }
         }
 

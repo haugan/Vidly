@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System.Linq;
@@ -158,9 +159,11 @@ namespace Vidly.Controllers
                     //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
                     //var roleManager = new RoleManager<IdentityRole>(roleStore);
                     //await roleManager.CreateAsync(new IdentityRole("MovieManager"));
+                    //await roleManager.CreateAsync(new IdentityRole("CustomerManager"));
 
                     // TEMP: Assign new user to role
                     //await UserManager.AddToRoleAsync(user.Id, "MovieManager");
+                    //await UserManager.AddToRoleAsync(user.Id, "CustomerManager");
 
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
@@ -367,7 +370,8 @@ namespace Vidly.Controllers
                 {
                     UserName = model.Email,
                     Email = model.Email,
-                    EmployeeNumber = model.EmployeeNumber
+                    EmployeeNumber = model.EmployeeNumber,
+                    Phone = model.Phone
                 };
 
                 var result = await UserManager.CreateAsync(user);

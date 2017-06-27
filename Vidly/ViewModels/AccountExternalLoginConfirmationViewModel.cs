@@ -9,6 +9,10 @@ namespace Vidly.ViewModels
         public int EmployeeNumber { get; set; }
 
         [Required]
+        [Display(Name = "Phone #")]
+        public string Phone { get; set; }
+
+        [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }

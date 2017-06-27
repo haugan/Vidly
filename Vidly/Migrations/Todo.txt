@@ -1,0 +1,8 @@
+﻿TODO:
+
+1) Finn bedre måte å administrere Users, Roles, og UserRoles på. 
+   - Lær ASP.NET Identity!
+   - Bygg User/Roles GUI (authorized for SuperUser)
+
+2) Clean ViewModels/DomainModels attributes.
+	- Mye dobbelkode?

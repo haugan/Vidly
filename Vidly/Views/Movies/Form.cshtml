@@ -5,44 +5,41 @@
 }
 
 <h2>@Model.PageHeader</h2>
-<hr />
 
 <!--DISPOSE FORM OBJECT WHEN EXITING BLOCK-->
 @using (Html.BeginForm("Save", "Movies", FormMethod.Post, new { @class = "form-vertical", role = "form" }))
 {
-    <!--ANTI CSRF-->
     @Html.AntiForgeryToken()
+    @*@Html.ValidationSummary(true, "Oops! Something went wrong..", new { @class = "text-danger" })*@
 
-    <!--ERROR MESSAGE SUMMARY-->
-    @Html.ValidationSummary(true, "Oops! Something went wrong..", new { @class = "text-danger" })
-
-    <br />
-
+    <h4>Fill out the form fields and click save.</h4>
+    <hr />
+    
     <!--TITLE-->
     <div class="form-group">
         @Html.LabelFor(m => m.Title)
-        @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.Title, new { placeholder = "Movie title", @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Title)
     </div>
 
     <!--RELEASE DATE-->
     <div class="form-group">
         @Html.LabelFor(m => m.ReleaseDate)
-        @Html.TextBoxFor(m => m.ReleaseDate, "{0:d MMM yyyy}", new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.ReleaseDate, "{0:d MMM yyyy}", new { placeholder = "01 01 2001", @class = "form-control" })
         @Html.ValidationMessageFor(m => m.ReleaseDate)
     </div>
 
     <!--STOCK-->
     <div class="form-group">
         @Html.LabelFor(m => m.Stock)
-        @Html.TextBoxFor(m => m.Stock, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.Stock, new { placeholder = "Amount in stock", @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Stock)
     </div>
 
     <!--GENRE-->
     <div class="form-group">
         <label>Genre</label>
-        @Html.DropDownListFor(m => m.GenreId, new SelectList(Model.Genres, "Id", "Name"), "---", new { @class = "form-control" })
+        @Html.DropDownListFor(m => m.GenreId, new SelectList(Model.Genres, "Id", "Name"), "---" ,new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.GenreId)
     </div>
 
@@ -51,12 +48,9 @@
 
     <!--SUBMIT-->
     <br />
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Save</button>
-    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
 }
 
-@section scripts
-{
+@section scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
