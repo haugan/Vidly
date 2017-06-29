@@ -4,10 +4,10 @@ namespace Vidly
 {
     public class BundleConfig
     {
-        // READ MORE ON BUNDLING (COMBINE & COMPRESS LIBS): https://go.microsoft.com/fwlink/?LinkId=301862
+        // More on bundling: https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            // JAVASCRIPT LIBRARIES
+            // JS LIBS
             bundles.Add(new ScriptBundle("~/bundles/libs").Include(
                 "~/Scripts/jquery-{version}.js",
                 "~/Scripts/bootstrap.js",
@@ -15,9 +15,10 @@ namespace Vidly
                 "~/Scripts/respond.js",
                 "~/Scripts/DataTables/media/js/jquery.dataTables.js",
                 "~/Scripts/DataTables/media/js/dataTables.bootstrap.js",
-                "~/Scripts/typeahead.bundle.js"));
+                "~/Scripts/typeahead.bundle.js",
+                "~/Scripts/toastr.js"));
 
-            // VALIDATION
+            // JQUERY VAL
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                 "~/Scripts/jquery.validate*"));
 
@@ -27,11 +28,12 @@ namespace Vidly
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                 "~/Scripts/modernizr-*"));
 
-            // CSS STYLING
+            // CSS
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap-flatly.css",
                 "~/Content/DataTables/media/css/dataTables.bootstrap.css",
                 "~/Content/typeahead.css",
+                "~/Content/toastr.css",
                 "~/Content/site.css"));
         }
     }

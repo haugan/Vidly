@@ -24,18 +24,20 @@ namespace Vidly.Controllers.Api
         }
 
         // GET: api/customers?queryString=xxx
-        public IEnumerable<CustomerDto> GetAllCustomers(string queryString = null)
+        public IHttpActionResult GetAllCustomers(string queryString = null)
         {
-            // EAGER LOAD HIERARCHICAL TYPE ("INCLUDE") FOR DATATABLE CONSUMPTION THROUGH WEB API
+            // Eager load hierarchical types for DataTable consumption from ASP.NET Web API
             var dbQuery = _db.Customers
                 .Include(c => c.MembershipType);
 
             if (!String.IsNullOrWhiteSpace(queryString))
                 dbQuery = dbQuery.Where(c => c.Lastname.Contains(queryString));
 
-            return dbQuery
+            var dtos = dbQuery
                 .ToList()
                 .Select(Mapper.Map<Customer, CustomerDto>);
+
+            return Ok(dtos);
         }
 
         // GET: api/customers/123

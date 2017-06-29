@@ -24,7 +24,7 @@ namespace Vidly.Controllers.Api
         }
 
         // GET: api/movies?queryString=xxx
-        public IEnumerable<MovieDto> GetAllMovies(string queryString = null)
+        public IHttpActionResult GetAllMovies(string queryString = null)
         {
             var dbQuery = _db.Movies
                 .Include(m => m.Genre)
@@ -33,9 +33,11 @@ namespace Vidly.Controllers.Api
             if (!String.IsNullOrWhiteSpace(queryString))
                 dbQuery = dbQuery.Where(m => m.Title.Contains(queryString));
 
-            return dbQuery
+            var dtos = dbQuery
                 .ToList()
                 .Select(Mapper.Map<Movie, MovieDto>);
+
+            return Ok(dtos);
         }
 
         // GET: api/movies/123

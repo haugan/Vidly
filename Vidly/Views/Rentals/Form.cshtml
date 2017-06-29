@@ -8,25 +8,37 @@
 <h4>Find customer, add all movies, then click register.</h4>
 <hr />
 
-<form>
-    <!--CUSTOMER-->
+<form id="rentalForm">
+    <!--CUSTOMER SEARCH-->
     <div class="form-group">
         <label>Customer</label>
         <div class="tt-container">
-            <input type="text" value="" id="customerSearchBox" class="typeahead form-control" />
+            <input type="text"
+                   value=""
+                   required
+                   data-rule-validCustomer="true"
+                   name="customerSearchBox" 
+                   id="customerSearchBox"
+                   class="typeahead form-control" />
         </div>
     </div>
 
-    <!--MOVIE-->
+    <!--MOVIE SEARCH-->
     <div class="form-group">
         <label>Movie</label>
         <div class="tt-container">
-            <input type="text" value="" id="movieSearchBox" class="typeahead form-control" />
+            <input type="text"
+                   value=""
+                   data-rule-availableMovie="true"
+                   name="movieSearchBox"
+                   id="movieSearchBox"
+                   class="typeahead form-control" />
         </div>
     </div>
 
+    <!--SELECTED MOVIES-->
     <div class="row">
-        <div class="col-md-4 col-sm-4">
+        <div class="col-md-4 col-sm-4 col-xs-4">
             <ul id="movieList" class="list-group"></ul>
         </div>
     </div>
@@ -35,14 +47,14 @@
 </form>
 
 @section scripts {
-    
+    @Scripts.Render("~/bundles/jqueryval")
     <script>
         $(document).ready(function () {
-
             var viewmodel = {
                 movieIds: [] // Empty array for pushing MovieID objects
             };
 
+            // Customer lastname searchbox
             var customers = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('lastname'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -56,15 +68,16 @@
                 minLength: 3,
                 highlight: true
             }, {
-                name: 'customers',
-                display: 'lastname',
-                source: customers
-            }).on("typeahead:select", function (e, customer) {
-                viewmodel.customerId = customer.id;
-                // BUG? customerId: undefined
-                console.log("customerId: " + customer.id);
-            });
+                    name: 'customers',
+                    display: 'lastname',
+                    source: customers
+                }).on("typeahead:select", function (e, customer) {
+                    viewmodel.customerId = customer.id;
+                    console.log("customerId: " + customer.id);
+                });
 
+
+            // Movie title search box
             var movies = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('title'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -78,22 +91,65 @@
                 minLength: 3,
                 highlight: true
             }, {
-                name: 'movies',
-                display: 'title',
-                source: movies
-            }).on("typeahead:select", function (e, movie) {
-                // Consider data-binding frameworks for updating the DOM
-                // whenever the underlying view model changes (Knockout, Angular, React, Vue, etc.)
-                $("#movieList").append(`<li class="list-group-item list-group-item-success">${movie.title}</li>`);
-                // Use Typeahead plugin to update "val" property of "movieSearchBox".
-                $("#movieSearchBox").typeahead("val", "");
-                // Add movies to view model.
-                viewmodel.movieIds.push(movie.id);
-                // BUG? movieId: undefined
-                console.log("movieId: " + movie.id);
-            });
+                    name: 'movies',
+                    display: 'title',
+                    source: movies
+                })
+                .on("typeahead:select", function (e, movie) {
+                    // Consider data-binding frameworks for updating the DOM
+                    // whenever the underlying view model changes (Knockout, Angular, React, Vue, etc.)
+                    $("#movieList").append(`<button type="button" class="list-group-item list-group-item-success">${movie.title}</button>`);
+                    // Use Typeahead plugin to update "val" property of "movieSearchBox"
+                    $("#movieSearchBox").typeahead("val", "");
+                    // Add movies to view model
+                    viewmodel.movieIds.push(movie.id);
+                    // TODO: Remove movies from view model when user clicks movie button
+                    console.log("movieId: " + movie.id);
+                });
 
-            // TODO: Create new rental!
+            // Customize position of Toastr notification
+            toastr.options = {
+                "positionClass": "toast-bottom-full-width"
+            };
+
+            // Custom validation for customer lastname
+            $.validator.addMethod("validCustomer", function () {
+                return viewmodel.customerId && viewmodel.customerId !== 0;
+            }, "Customer name is invalid.");
+
+            // Custom validation for movie availability
+            $.validator.addMethod("availableMovie", function () {
+                return viewmodel.movieIds.length > 0;
+            }, "No movie was selected.");
+
+            // Plug jQuery validation to HTML form
+            var validator = $("#rentalForm").validate({
+                submitHandler: function () {
+                    // Call server with HTTP request
+                    $.ajax({
+                        url: "/api/rentals",
+                        method: "post",
+                        data: viewmodel
+                    })
+                        .done(function () {
+                            toastr.success("Success! The new rental was registered!");
+                            $("#customerSearchBox").typeahead("val", "");
+                            $("#movieSearchBox").typeahead("val", "");
+                            $("#movieList").empty();
+                            viewmodel = {
+                                movieIds: []
+                            };
+
+                            validator.resetForm();
+                        })
+                        .fail(function () {
+                            toastr.error("Oops! An error occured and the new rental failed to register.");
+                        });
+
+                    // Prevent form from being submitted with invalid data
+                    return false;
+                }
+            });
 
         });
     </script>
