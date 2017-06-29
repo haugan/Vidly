@@ -33,4 +33,4 @@ this is taken care of by carefully configuring the app using the ASP.NET Identit
 When registering a new object in the database which connects several other objects -
 Twitter's Typeahead plugin provides auto completion so your user is sure to find and select the right ones!
 
-![Auto completion as a search function](https://s9.postimg.org/t4qjdevsv/vidly5.png)
+![Auto completion as a search function](https://s16.postimg.org/xtec7r15h/vidly5.png)
