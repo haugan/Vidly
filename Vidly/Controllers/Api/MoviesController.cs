@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
@@ -22,16 +23,19 @@ namespace Vidly.Controllers.Api
             _db.Dispose();
         }
 
-        // GET: api/movies
-        public IHttpActionResult GetAllMovies()
+        // GET: api/movies?queryString=xxx
+        public IEnumerable<MovieDto> GetAllMovies(string queryString = null)
         {
-            // EAGER LOAD HIERARCHICAL TYPE ("INCLUDE") FOR DATATABLE CONSUMPTION THROUGH WEB API
-            var dtos = _db.Movies
+            var dbQuery = _db.Movies
                 .Include(m => m.Genre)
+                .Where(m => m.AmountAvailable > 0);
+
+            if (!String.IsNullOrWhiteSpace(queryString))
+                dbQuery = dbQuery.Where(m => m.Title.Contains(queryString));
+
+            return dbQuery
                 .ToList()
                 .Select(Mapper.Map<Movie, MovieDto>);
-
-            return Ok(dtos);
         }
 
         // GET: api/movies/123

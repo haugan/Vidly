@@ -24,15 +24,17 @@ namespace Vidly.Controllers.Api
         [HttpPost]
         public IHttpActionResult CreateRental(RentalDto dto)
         {
-            var customer = _db.Customers.Single(c => c.Id == dto.CustomerId);
+            var customer = _db.Customers.Single(
+                c => c.Id == dto.CustomerId);
 
             // SELECT * FROM Movies IN (1,2,3,4)
-            var movies = _db.Movies.Where(m => dto.MovieIds.Contains(m.Id)).ToList();
+            var movies = _db.Movies.Where(
+                m => dto.MovieIds.Contains(m.Id)).ToList();
 
             foreach (var movie in movies)
             {
                 if (movie.AmountAvailable == 0)
-                    return BadRequest("No more available movies!");
+                    return BadRequest("Amount of available movies is 0!");
 
                 movie.AmountAvailable--;
 

@@ -223,6 +223,7 @@
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RentalsController.cs" />
     <Compile Include="Dto\CustomerDto.cs" />
     <Compile Include="Dto\GenreDto.cs" />
     <Compile Include="Dto\MembershipTypeDto.cs" />
@@ -509,11 +510,14 @@
     <Content Include="Content\DataTables\media\images\sort_both.png" />
     <Content Include="Content\DataTables\media\images\sort_desc.png" />
     <Content Include="Content\DataTables\media\images\sort_desc_disabled.png" />
+    <Content Include="Content\typeahead.css" />
     <Content Include="CreatingAndSeedingUsersAndRoles.txt" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Migrations\Todo.txt" />
+    <Content Include="Scripts\bloodhound.js" />
+    <Content Include="Scripts\bloodhound.min.js" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -626,6 +630,10 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\typeahead.bundle.js" />
+    <Content Include="Scripts\typeahead.bundle.min.js" />
+    <Content Include="Scripts\typeahead.jquery.js" />
+    <Content Include="Scripts\typeahead.jquery.min.js" />
     <Content Include="UsingAutoMapper.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -669,6 +677,7 @@
     <Content Include="Views\Customers\Form.cshtml" />
     <Content Include="Views\Movies\Form.cshtml" />
     <Content Include="Views\Movies\TableReadOnly.cshtml" />
+    <Content Include="Views\Rentals\Form.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

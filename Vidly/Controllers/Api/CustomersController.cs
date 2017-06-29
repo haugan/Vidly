@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
@@ -22,16 +23,19 @@ namespace Vidly.Controllers.Api
             _db.Dispose();
         }
 
-        // GET: api/customers
-        public IHttpActionResult GetAllCustomers()
+        // GET: api/customers?queryString=xxx
+        public IEnumerable<CustomerDto> GetAllCustomers(string queryString = null)
         {
             // EAGER LOAD HIERARCHICAL TYPE ("INCLUDE") FOR DATATABLE CONSUMPTION THROUGH WEB API
-            var dtos = _db.Customers
-                .Include(c => c.MembershipType)
+            var dbQuery = _db.Customers
+                .Include(c => c.MembershipType);
+
+            if (!String.IsNullOrWhiteSpace(queryString))
+                dbQuery = dbQuery.Where(c => c.Lastname.Contains(queryString));
+
+            return dbQuery
                 .ToList()
                 .Select(Mapper.Map<Customer, CustomerDto>);
-
-            return Ok(dtos);
         }
 
         // GET: api/customers/123
@@ -44,6 +48,7 @@ namespace Vidly.Controllers.Api
 
             return Ok(Mapper.Map<Customer, CustomerDto>(dbCustomer));
         }
+
 
         // POST: api/customers
         [HttpPost]

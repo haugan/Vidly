@@ -1,0 +1,101 @@
+﻿@model Vidly.Models.Rental
+
+@{
+    ViewBag.Title = "Rental form";
+}
+
+<h2>Register new rental</h2>
+<h4>Find customer, add all movies, then click register.</h4>
+<hr />
+
+<form>
+    <!--CUSTOMER-->
+    <div class="form-group">
+        <label>Customer</label>
+        <div class="tt-container">
+            <input type="text" value="" id="customerSearchBox" class="typeahead form-control" />
+        </div>
+    </div>
+
+    <!--MOVIE-->
+    <div class="form-group">
+        <label>Movie</label>
+        <div class="tt-container">
+            <input type="text" value="" id="movieSearchBox" class="typeahead form-control" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-sm-4">
+            <ul id="movieList" class="list-group"></ul>
+        </div>
+    </div>
+
+    <button class="btn btn-primary">Register</button>
+</form>
+
+@section scripts {
+    
+    <script>
+        $(document).ready(function () {
+
+            var viewmodel = {
+                movieIds: [] // Empty array for pushing MovieID objects
+            };
+
+            var customers = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('lastname'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/customers?queryString=%QUERY',
+                    wildcard: '%QUERY' // What user types in textbox
+                }
+            });
+
+            $('#customerSearchBox').typeahead({
+                minLength: 3,
+                highlight: true
+            }, {
+                name: 'customers',
+                display: 'lastname',
+                source: customers
+            }).on("typeahead:select", function (e, customer) {
+                viewmodel.customerId = customer.id;
+                // BUG? customerId: undefined
+                console.log("customerId: " + customer.id);
+            });
+
+            var movies = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('title'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/movies?queryString=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#movieSearchBox').typeahead({
+                minLength: 3,
+                highlight: true
+            }, {
+                name: 'movies',
+                display: 'title',
+                source: movies
+            }).on("typeahead:select", function (e, movie) {
+                // Consider data-binding frameworks for updating the DOM
+                // whenever the underlying view model changes (Knockout, Angular, React, Vue, etc.)
+                $("#movieList").append(`<li class="list-group-item list-group-item-success">${movie.title}</li>`);
+                // Use Typeahead plugin to update "val" property of "movieSearchBox".
+                $("#movieSearchBox").typeahead("val", "");
+                // Add movies to view model.
+                viewmodel.movieIds.push(movie.id);
+                // BUG? movieId: undefined
+                console.log("movieId: " + movie.id);
+            });
+
+            // TODO: Create new rental!
+
+        });
+    </script>
+
+}
