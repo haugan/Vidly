@@ -133,13 +133,14 @@
                     })
                         .done(function () {
                             toastr.success("Success! The new rental was registered!");
+                            // Clear searchbox and list values, reset viewmodel
                             $("#customerSearchBox").typeahead("val", "");
                             $("#movieSearchBox").typeahead("val", "");
                             $("#movieList").empty();
                             viewmodel = {
                                 movieIds: []
                             };
-
+                            // Reset validation state in form
                             validator.resetForm();
                         })
                         .fail(function () {
