@@ -28,3 +28,9 @@ It's important to give different users different responsibilites and authorizati
 this is taken care of by carefully configuring the app using the ASP.NET Identity framework!
 
 ![Guest users don't have access to certain actions](https://s30.postimg.org/oxtsliich/vidly4.png)
+
+### Search with auto completion
+When registering a new object in the database which connects several other objects -
+Twitter's Typeahead plugin provides auto completion so your user is sure to find and select the right ones!
+
+![Auto completion as a search function](https://s16.postimg.org/xtec7r15h/vidly5.png)
